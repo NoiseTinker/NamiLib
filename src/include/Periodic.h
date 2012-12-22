@@ -3,21 +3,31 @@
 * Author: Daniel Hjort
 */
 
-float y(Periodic* func, float x);
+#ifndef __PERIODIC_H__
+#define __PERIODIC_H__
 
-void addFunction(Periodic* func, float (*func)(float));
-void addWayPoint(Periodic* func, float x, float y);
+typedef struct {
+	double (*func)(double);
+} Periodic;
 
-void clear();
+double y(Periodic* pf, double x);
+
+void addFunction(Periodic* pf, double (*func)(double));
+
+void addWayPoint(Periodic* pf, double x, double y);
+
+void clear(Periodic* pf);
 
 /*
- * Functions map a position 0 <= x <= 1 to a value -1 <= y <= 1.
+ * Functions map a position 0 <= x <= 2*PI to a value -1 <= y <= 1.
  */
 
-float sine_wave(float x);
+double sine_wave(double x);
 
-float square_wave(float x);
+double square_wave(double x);
 
-float triangle_wave(float x);
+double triangle_wave(double x);
 
-float sawtooth_wave(float x);
+double sawtooth_wave(double x);
+
+#endif

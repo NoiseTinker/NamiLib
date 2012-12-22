@@ -9,8 +9,13 @@
 
 extern void TestFftFlatSignal(CuTest*);
 extern void TestFftRossetaCode(CuTest*);
-extern void TestFftSineSignal(CuTest*);
-extern void TestInverseFftSineSignal(CuTest*);
+extern void TestSine(CuTest*);
+extern void TestSquare(CuTest*);
+extern void TestTriangle(CuTest*);
+extern void TestSawtooth(CuTest*);
+extern void TestAddFunction(CuTest*);
+extern void TestAddWayPoints(CuTest*);
+extern void TestClear(CuTest*);
 
 
 void RunAllTests(void) 
@@ -21,8 +26,13 @@ void RunAllTests(void)
 
     SUITE_ADD_TEST(suite, TestFftFlatSignal);
     SUITE_ADD_TEST(suite, TestFftRossetaCode);
-    SUITE_ADD_TEST(suite, TestFftSineSignal);
-    SUITE_ADD_TEST(suite, TestInverseFftSineSignal);
+    SUITE_ADD_TEST(suite, TestSine);
+    SUITE_ADD_TEST(suite, TestSquare);
+    SUITE_ADD_TEST(suite, TestTriangle);
+    SUITE_ADD_TEST(suite, TestSawtooth);
+    SUITE_ADD_TEST(suite, TestAddFunction);
+    SUITE_ADD_TEST(suite, TestAddWayPoints);
+    SUITE_ADD_TEST(suite, TestClear);
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
