@@ -23,10 +23,10 @@ FFTIMPL = fftsg
 
 LIB = libNami.a
 
-_DEPS = ComplexNumber.h Fft.h Periodic.h Frame.h
+_DEPS = ComplexNumber.h Fft.h Periodic.h Wave.h Frame.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = ComplexNumber.o Fft.o Periodic.o Frame.o fftsg.o
+_OBJ = ComplexNumber.o Fft.o Periodic.o Wave.o Frame.o fftsg.o
 
 ifdef CROSS_COMPILE
 	ODIR = $(OUTDIR)/$(CROSS_COMPILE)obj
@@ -36,7 +36,7 @@ else
 	TESTOBJ = $(patsubst %,$(TESTODIR)/%,$(_OBJ))
 endif
 
-_TESTS = FftTest.o PeriodicTest.o CuTest.o AllTests.o
+_TESTS = FftTest.o PeriodicTest.o WaveTest.o CuTest.o AllTests.o
 TESTS = $(patsubst %,$(TESTODIR)/%,$(_TESTS))
 
 # Make stuff

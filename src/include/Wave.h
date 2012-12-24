@@ -3,9 +3,32 @@
 * Author: Daniel Hjort
 */
 
-float y(Wave* wave, float x, float t);
+#ifndef __WAVE_H__
+#define __WAVE_H__
 
+#include "Periodic.h"
+
+typedef struct {
+	Periodic* func;
+	double amplitude;
+	double phase;
+	double wavenumber;
+	double angularFrequency;
+} Wave;
+
+double waveY(Wave* wave, double x, double t);
+
+/*
+ * See https://en.wikipedia.org/wiki/Wave#Sinusoidal_waves
+ */
 void addPeriodic(Wave* wave, Periodic* func,
-	float amplitude, float phase, float frequency);
+	double amplitude, double phase,
+	double wavenumber, double angularFrequency);
 
-void clear();
+void clearWave(Wave* wave);
+
+double angularFrequencyFromFrequency(double frequency);
+
+double waveNumberFromWaveLength(double wavelength);
+
+#endif
