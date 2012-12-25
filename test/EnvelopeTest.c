@@ -17,7 +17,7 @@ void TestEnvelope(CuTest* tc)
 	params.sustainTime = 2;
 	params.releaseTime = 2;
 
-	addEnvelopeFunction(&env, &adsr, &params);
+	setEnvelopeFunction(&env, &adsr, &params);
 
 	CuAssertTrue(tc, envelopeY(&env, 0) == 0);
 	CuAssertTrue(tc, envelopeY(&env, 1) == 0.5);

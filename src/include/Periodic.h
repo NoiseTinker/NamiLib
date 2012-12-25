@@ -12,7 +12,7 @@ typedef struct {
 
 double y(Periodic* pf, double x);
 
-void addFunction(Periodic* pf, double (*func)(double));
+void setFunction(Periodic* pf, double (*func)(double));
 
 void addWayPoint(Periodic* pf, double x, double y);
 

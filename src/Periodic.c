@@ -17,7 +17,7 @@ double y(Periodic* pf, double x)
 	return pf->func(x);
 }
 
-void addFunction(Periodic* pf, double (*func)(double))
+void setFunction(Periodic* pf, double (*func)(double))
 {
 	 pf->func = func;
 }

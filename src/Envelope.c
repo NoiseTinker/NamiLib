@@ -10,7 +10,7 @@ double envelopeY(Envelope* env, double t)
 	return env->func(t, env->data);
 }
 
-void addEnvelopeFunction(Envelope* env, double (*func)(double, void*), void* data)
+void setEnvelopeFunction(Envelope* env, double (*func)(double, void*), void* data)
 {
 	env->func = func;
 	env->data = data;

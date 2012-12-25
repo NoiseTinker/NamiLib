@@ -13,7 +13,7 @@ typedef struct {
 
 double envelopeY(Envelope* env, double t);
 
-void addEnvelopeFunction(Envelope* env, double (*func)(double, void*), void*);
+void setEnvelopeFunction(Envelope* env, double (*func)(double, void*), void*);
 
 /*
  *    /\
@@ -21,6 +21,8 @@ void addEnvelopeFunction(Envelope* env, double (*func)(double, void*), void*);
  *  /          \
  *
  *  A - D - S - R
+ *
+ *  https://en.wikipedia.org/wiki/Synthesizer#ADSR_envelope
  */
 typedef struct {
 	double attackTime;
@@ -33,11 +35,12 @@ typedef struct {
 double adsr(double t, void* data);
 
 /*
- *               ***
- *             *  |  *
- *            *   |   *
- *         *      |      *
- *  *             |              *
+ * https://en.wikipedia.org/wiki/Raised-cosine_filter
+ */
+double raisedCosine(double t, void* data);
+
+/*
+ * https://en.wikipedia.org/wiki/Gaussian_function
  */
 double gaussian(double t, void* data);
 

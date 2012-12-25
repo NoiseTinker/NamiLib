@@ -19,7 +19,7 @@ double waveY(Wave* wave, double t)
 	return envelope * y;;
 }
 
-bool addPeriodic(Wave* wave, Periodic* periodic,
+bool setPeriodic(Wave* wave, Periodic* periodic,
 	double amplitude, double phase,
 	double angularFrequency)
 {
@@ -31,7 +31,7 @@ bool addPeriodic(Wave* wave, Periodic* periodic,
 	return true;
 }
 
-void addEnvelope(Wave* wave, Envelope* envelope)
+void setEnvelope(Wave* wave, Envelope* envelope)
 {
 	wave->envelope = envelope;
 }

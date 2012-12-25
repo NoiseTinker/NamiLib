@@ -24,11 +24,11 @@ double waveY(Wave* wave, double t);
 /*
  * See https://en.wikipedia.org/wiki/Wave#Sinusoidal_waves
  */
-bool addPeriodic(Wave* wave, Periodic* periodic,
+bool setPeriodic(Wave* wave, Periodic* periodic,
 	double amplitude, double phase,
 	double angularFrequency);
 
-void addEnvelope(Wave* wave, Envelope* envelope);
+void setEnvelope(Wave* wave, Envelope* envelope);
 
 void clearWave(Wave* wave);
 

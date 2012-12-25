@@ -50,7 +50,7 @@ void TestSawtooth(CuTest* tc)
 void TestAddFunction(CuTest* tc)
 {
 	Periodic periodic;
-	addFunction(&periodic, &sine_wave);
+	setFunction(&periodic, &sine_wave);
 
 	CuAssertTrue(tc, y(&periodic, 0) == 0);
 	CuAssertTrue(tc, y(&periodic, M_PI/2) == 1);
@@ -65,7 +65,7 @@ void TestAddWayPoints(CuTest* tc)
 void TestClear(CuTest* tc)
 {
 	Periodic periodic;
-	addFunction(&periodic, (double (*)(double))123);
+	setFunction(&periodic, (double (*)(double))123);
 
 	CuAssertTrue(tc, periodic.func == (double (*)(double))123);
 
