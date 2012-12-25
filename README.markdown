@@ -8,14 +8,16 @@ Written as exercise.
 Features
 --------
 
-* FFT using Ooura's FFT implementations.
+* _Fft_ using Ooura's FFT implementations.
+* Sine, square, triangle and sawtooth _Periodic_ functions.
+* ADSR _Envelope_ function.
+* Parameterized _Wave_ from periodic function and envelope.
+* PCM _Frame_ to handle samples.
 
 Backlog
 -------
 
-* Sine, square, triangle and sawtooth periodic functions.
 * Waypoint periodic function.
-* Wave form composition.
 * File input/output (text, raw, GNUPlot).
 
 Build
