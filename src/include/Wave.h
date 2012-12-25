@@ -7,28 +7,31 @@
 #define __WAVE_H__
 
 #include "Periodic.h"
+#include "Envelope.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 typedef struct {
-	Periodic* func;
+	Periodic* periodic;
 	double amplitude;
 	double phase;
-	double wavenumber;
 	double angularFrequency;
+	Envelope* envelope;
 } Wave;
 
-double waveY(Wave* wave, double x, double t);
+double waveY(Wave* wave, double t);
 
 /*
  * See https://en.wikipedia.org/wiki/Wave#Sinusoidal_waves
  */
-void addPeriodic(Wave* wave, Periodic* func,
+bool addPeriodic(Wave* wave, Periodic* periodic,
 	double amplitude, double phase,
-	double wavenumber, double angularFrequency);
+	double angularFrequency);
+
+void addEnvelope(Wave* wave, Envelope* envelope);
 
 void clearWave(Wave* wave);
 
 double angularFrequencyFromFrequency(double frequency);
-
-double waveNumberFromWaveLength(double wavelength);
 
 #endif
