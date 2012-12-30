@@ -30,18 +30,19 @@ typedef struct {
 	double sustainLevel;
 	double sustainTime;
 	double releaseTime;
-} AdsrParamters;
+} AdsrParameters;
 
 double adsr(double t, void* data);
 
 /*
  * https://en.wikipedia.org/wiki/Raised-cosine_filter
  */
-double raisedCosine(double t, void* data);
+typedef struct {
+	double riseTime;
+	double fallTime;
+	double sustainTime;
+} RaisedCosineParameters;
 
-/*
- * https://en.wikipedia.org/wiki/Gaussian_function
- */
-double gaussian(double t, void* data);
+double raisedCosine(double t, void* data);
 
 #endif

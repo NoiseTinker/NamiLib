@@ -5,12 +5,13 @@
 
 #include "CuTest.h"
 #include "Envelope.h"
+#include <math.h>
 
 void TestEnvelope(CuTest* tc)
 {
 	Envelope env;
 
-	AdsrParamters params;
+	AdsrParameters params;
 	params.attackTime = 2;
 	params.decayTime = 2;
 	params.sustainLevel = 0.5;
@@ -32,7 +33,7 @@ void TestEnvelope(CuTest* tc)
 
 void TestAdsr(CuTest* tc)
 {
-	AdsrParamters params;
+	AdsrParameters params;
 	params.attackTime = 2;
 	params.decayTime = 2;
 	params.sustainLevel = 0.5;
@@ -48,4 +49,24 @@ void TestAdsr(CuTest* tc)
 	CuAssertTrue(tc, adsr(6, &params) == 0.5);
 	CuAssertTrue(tc, adsr(7, &params) == 0.25);
 	CuAssertTrue(tc, adsr(8, &params) == 0);
+}
+
+void TestRaisedCosine(CuTest* tc)
+{
+	RaisedCosineParameters params;
+	params.riseTime = 1;
+	params.fallTime = 1;
+	params.sustainTime = 1;
+
+	CuAssertTrue(tc, raisedCosine(-1, &params) == 0);
+	CuAssertTrue(tc, raisedCosine(0, &params) == 0);
+	CuAssertTrue(tc, fabs(raisedCosine(0.0001, &params) - 0.0001) < 0.0001);
+	CuAssertTrue(tc, fabs(raisedCosine(0.5, &params) - 0.5) < 0.0001);
+	CuAssertTrue(tc, fabs(raisedCosine(0.9999, &params) - 0.9999) < 0.0001);
+	CuAssertTrue(tc, raisedCosine(1.5, &params) == 1);
+	CuAssertTrue(tc, fabs(raisedCosine(2.0001, &params) - 0.9999) < 0.0001);
+	CuAssertTrue(tc, fabs(raisedCosine(2.5, &params) - 0.5) < 0.0001);
+	CuAssertTrue(tc, fabs(raisedCosine(2.9999, &params) - 0.0001) < 0.0001);
+	CuAssertTrue(tc, raisedCosine(3, &params) == 0);
+	CuAssertTrue(tc, raisedCosine(4, &params) == 0);
 }
