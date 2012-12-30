@@ -6,6 +6,7 @@
 #include "Wave.h"
 #include "Periodic.h"
 #include <stdio.h>
+#include <math.h>
 
 double waveY(Wave* wave, double t)
 {	
@@ -46,5 +47,11 @@ void clearWave(Wave* wave)
 
 double angularFrequencyFromFrequency(double frequency)
 {
-	return 0;
+	return 2*M_PI*frequency;
 }
+
+double angularFrequencyFromPeriod(double period)
+{
+	return (2*M_PI) / period;
+}
+

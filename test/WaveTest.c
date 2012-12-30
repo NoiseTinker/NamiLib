@@ -59,3 +59,13 @@ void TestAddSquareWaveWithAmplitude(CuTest* tc)
 	CuAssertTrue(tc, waveY(&wave, 0.01) == 2);
 }
 
+void TestAngularFrequencyFromFrequency(CuTest* tc)
+{
+	CuAssertTrue(tc, angularFrequencyFromFrequency(440) == 2*M_PI*440);
+}
+
+void TestAngularFrequencyFromPeriod(CuTest* tc)
+{
+	CuAssertTrue(tc, angularFrequencyFromPeriod(0.00227) == (2*M_PI)/0.00227);
+}
+

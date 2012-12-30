@@ -34,4 +34,6 @@ void clearWave(Wave* wave);
 
 double angularFrequencyFromFrequency(double frequency);
 
+double angularFrequencyFromPeriod(double period);
+
 #endif
