@@ -1,7 +1,7 @@
 NamiLib
 =======
 
-A library for basic signal processing implemented in C.
+A library for basic signal generation and processing implemented in C.
 
 Written as exercise.
 
@@ -10,7 +10,7 @@ Features
 
 * _Fft_ using Ooura's FFT implementations.
 * Sine, square, triangle and sawtooth _Periodic_ functions.
-* ADSR _Envelope_ function.
+* ADSR and raised-cosine _Envelope_ function.
 * Parameterized _Wave_ from periodic function and envelope.
 * PCM _Frame_ to handle samples.
 
