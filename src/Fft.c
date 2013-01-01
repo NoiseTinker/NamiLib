@@ -50,7 +50,7 @@ void ifft(ComplexNumber* spectrum, Frame* frame)
 static void copyDataToSpectrum(Frame* frame, ComplexNumber* spectrum)
 {
 	uint16_t size = frameSize(frame);
-	double* data = frameData(frame);
+	double* data = frameDoubleData(frame);
 
 	for (int i = 0; i < size; i++) {
 		spectrum[i].r = data[i];
@@ -61,7 +61,7 @@ static void copyDataToSpectrum(Frame* frame, ComplexNumber* spectrum)
 static void copyDataToFrame(ComplexNumber* spectrum, Frame* frame)
 {
 	uint16_t size = frameSize(frame);
-	double* data = frameData(frame);
+	double* data = frameDoubleData(frame);
 
 	for (int i = 0; i < size; i++) {
 		data[i] = spectrum[i].r;

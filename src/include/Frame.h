@@ -10,16 +10,34 @@
 
 #include <stdint.h>
 
+enum FrameEncoding {
+	UINT8,
+	SINT16,
+	FLOAT,
+	DOUBLE
+};
+
 typedef struct {
-	double* data;
+	enum FrameEncoding encoding;
+	void* data;
 	uint16_t size;
 } Frame;
 
-Frame* initFrame(Frame* frame, double* data, uint16_t size);
+Frame* initFrame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size);
 
 uint16_t frameSize(Frame* frame);
 
-double* frameData(Frame* frame);
+enum FrameEncoding frameEncoding(Frame* frame);
+
+Frame* writeFrameDataSample(Frame* frame, double data, uint32_t index);
+
+uint8_t* frameUInt8Data(Frame* frame);
+
+int16_t* frameSInt16Data(Frame* frame);
+
+float* frameFloatData(Frame* frame);
+
+double* frameDoubleData(Frame* frame);
 
 #endif
 

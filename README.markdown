@@ -8,11 +8,12 @@ Written as exercise.
 Features
 --------
 
-* _Fft_ using Ooura's FFT implementations.
 * Sine, square, triangle and sawtooth _Periodic_ functions.
 * ADSR and raised-cosine _Envelope_ function.
 * Parameterized _Wave_ from periodic function and envelope.
-* PCM _Frame_ to handle samples.
+* _Sampler_ to take samples from a _Wave_.
+* PCM _Frame_ to handle the samples.
+* _Fft_ using Ooura's FFT implementations.
 
 Backlog
 -------
@@ -43,23 +44,19 @@ The library provide a few building blocks that can be used to create wave forms.
 
     | Periodic function | ( -1 <= y <= 1, 0 <= x <= 2π )
               |
-              V
-      | Wave equation | <-  f, phase, A -> | Wave equation |
-              |                                   |
-              \---------------> + <---------------/
-                                |
-                                |         | Wave equation |
-                                V                 |
-                                * <---------------/
+              \---------------> * <--------- | Envelope |
                                 |
                                 V
-                           | WaveForm | <- x,t1,t2 or t,x1,x2
+                            | Wave | <-  f, phase, A
                                 |
                                 V
-                           | Sampler | <- sampling frequency, encoding
+                           | Sampler | <- sampling frequency, t1, t2 
                                 |
                                 V
-                            | Frame |
+                            | Frame | <- encoding
+                                |
+                                V
+                         | FrameWriter |
 
 ### Signal processing
 
@@ -82,10 +79,7 @@ The library provide a few building blocks that can be used to create wave forms.
 Examples
 --------
 
-### Square wave from sine waves
-
-
-### Gaussian enveloped sine wave (clickless Morse dit)
+### Sine wave with raised cosine envelope (clickless Morse dit)
 
 
 ### PSK31 Zero

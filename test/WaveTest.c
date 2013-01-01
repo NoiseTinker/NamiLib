@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 
-void TestAddSquareWaveInTime(CuTest* tc)
+void TestSetSquareWave(CuTest* tc)
 {
 	Periodic periodic;
 	Wave wave;
@@ -27,7 +27,7 @@ void TestAddSquareWaveInTime(CuTest* tc)
 	CuAssertTrue(tc, waveY(&wave, 3) == 1);
 }
 
-void TestAddSquareWaveWithPhase(CuTest* tc)
+void TestSetSquareWaveWithPhase(CuTest* tc)
 {
 	Periodic periodic;
 	Wave wave;
@@ -46,7 +46,7 @@ void TestAddSquareWaveWithPhase(CuTest* tc)
 	CuAssertTrue(tc, waveY(&wave, 3) == -1);
 }
 
-void TestAddSquareWaveWithAmplitude(CuTest* tc)
+void TestSetSquareWaveWithAmplitude(CuTest* tc)
 {
 	Periodic periodic;
 	Wave wave;

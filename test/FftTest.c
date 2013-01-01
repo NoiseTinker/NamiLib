@@ -18,7 +18,7 @@ void TestFftFlatSignal(CuTest* tc)
 	double flat[FRAME_SIZE] = {0};
 	ComplexNumber spectrum[FRAME_SIZE];
 
-	initFrame(&frame, flat, FRAME_SIZE);
+	initFrame(&frame, DOUBLE, flat, FRAME_SIZE);
 	fft(&frame, spectrum);
 
 	for (int i = 0; i < FRAME_SIZE; i++) {
@@ -33,7 +33,7 @@ void TestFftRossetaCode(CuTest* tc)
 	double flat[8] = {1, 1, 1, 1, 0, 0, 0, 0};
 	ComplexNumber spectrum[8];
 
-	initFrame(&frame, flat, 8);
+	initFrame(&frame, DOUBLE, flat, 8);
 	fft(&frame, spectrum);
 
 	CuAssertTrue(tc, getAbsolute(&spectrum[0]) == 4);
@@ -41,23 +41,25 @@ void TestFftRossetaCode(CuTest* tc)
 	CuAssertTrue(tc, getAbsolute(&spectrum[2]) == 0);
 	CuAssertTrue(tc, getAbsolute(&spectrum[3]) == 0);
 
-	frame.data[0] = 666;
-	frame.data[1] = 666;
-	frame.data[2] = 666;
-	frame.data[3] = 666;
-	frame.data[4] = 666;
-	frame.data[5] = 666;
-	frame.data[6] = 666;
-	frame.data[7] = 666;
+	double* data = frameDoubleData(&frame);
+
+	data[0] = 666;
+	data[1] = 666;
+	data[2] = 666;
+	data[3] = 666;
+	data[4] = 666;
+	data[5] = 666;
+	data[6] = 666;
+	data[7] = 666;
 
 	ifft(spectrum, &frame);
 
-	CuAssertTrue(tc, frame.data[0] == 1);
-	CuAssertTrue(tc, frame.data[1] == 1);
-	CuAssertTrue(tc, frame.data[2] == 1);
-	CuAssertTrue(tc, frame.data[3] == 1);
-	CuAssertTrue(tc, frame.data[4] == 0);
-	CuAssertTrue(tc, frame.data[5] == 0);
-	CuAssertTrue(tc, frame.data[6] == 0);
-	CuAssertTrue(tc, frame.data[7] == 0);
+	CuAssertTrue(tc, data[0] == 1);
+	CuAssertTrue(tc, data[1] == 1);
+	CuAssertTrue(tc, data[2] == 1);
+	CuAssertTrue(tc, data[3] == 1);
+	CuAssertTrue(tc, data[4] == 0);
+	CuAssertTrue(tc, data[5] == 0);
+	CuAssertTrue(tc, data[6] == 0);
+	CuAssertTrue(tc, data[7] == 0);
 }
