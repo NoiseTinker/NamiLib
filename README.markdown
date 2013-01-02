@@ -84,13 +84,6 @@ Examples
 
 #### Code
 
-    Periodic periodic;
-    Envelope envelope;
-    RaisedCosineParameters params;
-    Wave wave;
-    Sampler sampler;
-    Frame frame;
-    FrameWriter frameWriter;
     uint8_t data[FRAME_SIZE] = {0};
 
     double angularFrequency = angularFrequencyFromFrequency(440);
@@ -120,8 +113,46 @@ Waveform as viewed in Audacity:
 
 ![Sine440HzRaisedCosineEnvelope](https://github.com/daijo/NamiLib/raw/master/examples/sine_440Hz_raised_cosine_envelope.png)
 
-### PSK31 Zero
+### PSK31 Zeros
 
+#### Code
+
+    uint8_t data[FRAME_SIZE] = {0};
+    double angularFrequency = angularFrequencyFromFrequency(700);
+
+    params.riseTime = 0.020;
+    params.fallTime = 0.020;
+    params.sustainTime = 0;
+
+    setFunction(&periodic, &sine_wave);
+    setEnvelopeFunction(&envelope, raisedCosine, (void*)&params);
+    setPeriodic(&wave, &periodic, 0.5, 0, angularFrequency);
+    setEnvelope(&wave, &envelope);
+    initSampler(&sampler, &wave, 0, 0.040, SAMPLE_RATE);
+    initFrame(&frame, UINT8, &data, FRAME_SIZE);
+    openFrameWriter(&frameWriter, "out/test-output/psk31_zeros_test.raw");
+
+    for (int i = 0; i < 40; i++) {
+
+        while (samplesLeft(&sampler) > 0) {
+
+            fillFrame(&sampler, &frame);
+            writeFrame(&frameWriter, &frame);
+        }
+
+        wave.phase += M_PI;
+        setCurrentSampleTime(&sampler, 0);
+    }
+
+    closeFrameWriter(&frameWriter);
+
+#### Waveform
+
+Waveform as viewed in Audacity:
+
+![Psk31Zeros](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.png)
+
+[Ogg Vorbis](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.ogg)
 
 ### FFT pass band filter
 
