@@ -82,6 +82,43 @@ Examples
 
 ### Sine wave with raised cosine envelope (clickless Morse dit)
 
+#### Code
+
+    Periodic periodic;
+    Envelope envelope;
+    RaisedCosineParameters params;
+    Wave wave;
+    Sampler sampler;
+    Frame frame;
+    FrameWriter frameWriter;
+    uint8_t data[FRAME_SIZE] = {0};
+
+    double angularFrequency = angularFrequencyFromFrequency(440);
+    params.riseTime = 0.020;
+    params.fallTime = 0.020;
+    params.sustainTime = 0.040;
+
+    setFunction(&periodic, &sine_wave);
+    setEnvelopeFunction(&envelope, raisedCosine, (void*)&params);
+    setPeriodic(&wave, &periodic, 0.5, 0, angularFrequency);
+    setEnvelope(&wave, &envelope);
+    initSampler(&sampler, &wave, 0, 0.080, SAMPLE_RATE);
+    initFrame(&frame, UINT8, &data, FRAME_SIZE);
+    openFrameWriter(&frameWriter, "out/test-output/enveloped_sine_test.raw");
+
+    while (samplesLeft(&sampler) > 0) {
+
+        fillFrame(&sampler, &frame);
+        writeFrame(&frameWriter, &frame);
+    }
+
+    closeFrameWriter(&frameWriter);
+
+#### Waveform
+
+Waveform as viewed in Audacity:
+
+![Sine440HzRaisedCosineEnvelope](https://github.com/daijo/NamiLib/raw/master/examples/sine_440Hz_raised_cosine_envelope.png)
 
 ### PSK31 Zero
 
