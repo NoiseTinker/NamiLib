@@ -5,6 +5,7 @@ TESTDIR = ./test
 OUTDIR = ./out
 ODIR = $(OUTDIR)/obj
 TESTODIR = $(OUTDIR)/test-obj
+TESTOUTDIR = $(OUTDIR)/test-output
 IDIR = ./src/include
 
 # Toolchain
@@ -23,10 +24,10 @@ FFTIMPL = fftsg
 
 LIB = libNami.a
 
-_DEPS = ComplexNumber.h Fft.h Periodic.h Envelope.h Wave.h Frame.h Sampler.h
+_DEPS = ComplexNumber.h Fft.h Periodic.h Envelope.h Wave.h Frame.h FrameWriter.h Sampler.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = ComplexNumber.o Fft.o Periodic.o Envelope.o Wave.o Frame.o Sampler.o fftsg.o
+_OBJ = ComplexNumber.o Fft.o Periodic.o Envelope.o Wave.o Frame.o FrameWriter.o Sampler.o fftsg.o
 
 ifdef CROSS_COMPILE
 	ODIR = $(OUTDIR)/$(CROSS_COMPILE)obj
@@ -36,7 +37,7 @@ else
 	TESTOBJ = $(patsubst %,$(TESTODIR)/%,$(_OBJ))
 endif
 
-_TESTS = FftTest.o PeriodicTest.o EnvelopeTest.o WaveTest.o SamplerTest.o CuTest.o AllTests.o
+_TESTS = FftTest.o PeriodicTest.o EnvelopeTest.o WaveTest.o SamplerTest.o FrameWriterTest.o CuTest.o AllTests.o
 TESTS = $(patsubst %,$(TESTODIR)/%,$(_TESTS))
 
 # Make stuff
@@ -67,7 +68,7 @@ $(OUTDIR)/$(CROSS_COMPILE)$(LIB): $(OBJ) $(OUTDIR)/.d
 
 # Test
 
-test: $(OUTDIR)/test-$(LIB) $(TESTS) $(OUTDIR)/gcov/.d
+test: $(OUTDIR)/test-$(LIB) $(TESTS) $(OUTDIR)/gcov/.d $(TESTOUTDIR)/.d
 	clang $(TESTS) -o $(OUTDIR)/run-all-tests -I./test $(CFLAGS) $(OUTDIR)/test-$(LIB) -fprofile-arcs -ftest-coverage
 	$(OUTDIR)/run-all-tests
 	gcov -l -o$(TESTODIR) $(SRCDIR)/*.c 2> /dev/null > $(OUTDIR)/gcov/summary.txt

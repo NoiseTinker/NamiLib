@@ -9,6 +9,7 @@
 #define __FRAME_H__
 
 #include <stdint.h>
+#include <stddef.h>
 
 enum FrameEncoding {
 	UINT8,
@@ -28,6 +29,8 @@ Frame* initFrame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t
 uint16_t frameSize(Frame* frame);
 
 enum FrameEncoding frameEncoding(Frame* frame);
+
+size_t frameSampleDataSize(Frame* frame);
 
 Frame* writeFrameDataSample(Frame* frame, double data, uint32_t index);
 

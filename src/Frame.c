@@ -27,6 +27,32 @@ enum FrameEncoding frameEncoding(Frame* frame)
 	return frame->encoding;
 }
 
+size_t frameSampleDataSize(Frame* frame)
+{
+	size_t size;
+
+	switch (frame->encoding) {
+
+		case UINT8:
+		size = sizeof(uint8_t);
+		break;
+		case SINT16:
+		size = sizeof(int16_t);
+		break;
+		case FLOAT:
+		size = sizeof(float);
+		break;
+		case DOUBLE:
+		size = sizeof(double);
+		break;
+		default:
+		size = 0;
+		break;
+	}
+
+	return size;
+}
+
 Frame* writeFrameDataSample(Frame* frame, double data, uint32_t index)
 {
 

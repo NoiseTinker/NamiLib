@@ -14,12 +14,13 @@ Features
 * _Sampler_ to take samples from a _Wave_.
 * PCM _Frame_ to handle the samples.
 * _Fft_ using Ooura's FFT implementations.
+* _FrameWriter_ to write _Frame_s to a file.
 
 Backlog
 -------
 
 * Waypoint periodic function.
-* File input/output (text, raw, GNUPlot).
+* File input.
 
 Build
 -----

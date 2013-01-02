@@ -7,12 +7,17 @@
 #define __FRAMEWRITER_H__
 
 #include "Frame.h"
+#include <stdio.h>
+#include <stdbool.h>
 
-openFrameWriter(FrameWriter* frameWriter);
+typedef struct {
+	FILE* file;
+} FrameWriter;
 
-closeFrameWriter(FrameWriter* frameWriter);
+bool openFrameWriter(FrameWriter* frameWriter, char* filename);
 
-writeFrame(FrameWriter* frameWriter, Frame* frame);
+bool closeFrameWriter(FrameWriter* frameWriter);
+
+size_t writeFrame(FrameWriter* frameWriter, Frame* frame);
 
 #endif
-
