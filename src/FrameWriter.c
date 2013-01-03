@@ -20,5 +20,6 @@ bool closeFrameWriter(FrameWriter* frameWriter)
 size_t writeFrame(FrameWriter* frameWriter, Frame* frame)
 {
 	return fwrite(frame->data, frameSampleDataSize(frame), frame->size, frameWriter->file);
+	return fwrite(frame->data, frameSampleDataSize(frame), frame->used, frameWriter->file);
 }
 

@@ -13,6 +13,7 @@ Frame* initFrame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t
 	frame->encoding = encoding;
 	frame->data = data;
 	frame->size = size;
+	frame->used = 0;
 
 	return frame;
 }
@@ -73,6 +74,8 @@ Frame* writeFrameDataSample(Frame* frame, double data, uint32_t index)
 		default:
 		break;
 	}
+
+	frame->used = index + 1;
 
 	return frame;
 }

@@ -22,6 +22,7 @@ typedef struct {
 	enum FrameEncoding encoding;
 	void* data;
 	uint16_t size;
+	uint16_t used;
 } Frame;
 
 Frame* initFrame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size);

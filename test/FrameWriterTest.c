@@ -193,15 +193,15 @@ void TestWritePSK31Zeros(CuTest* tc)
 	uint8_t data[FRAME_SIZE] = {0};
 	double angularFrequency = angularFrequencyFromFrequency(700);
 
-        params.riseTime = 0.020;
-        params.fallTime = 0.020;
+        params.riseTime = 0.016;
+        params.fallTime = 0.016;
         params.sustainTime = 0;
 
 	setFunction(&periodic, &sine_wave);
 	setEnvelopeFunction(&envelope, raisedCosine, (void*)&params);
 	setPeriodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	setEnvelope(&wave, &envelope);
-	initSampler(&sampler, &wave, 0, 0.040, SAMPLE_RATE);
+	initSampler(&sampler, &wave, 0, 0.032, SAMPLE_RATE);
 	initFrame(&frame, UINT8, &data, FRAME_SIZE);
 	openFrameWriter(&frameWriter, "out/test-output/psk31_zeros_test.raw");
 
