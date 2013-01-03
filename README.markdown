@@ -111,7 +111,9 @@ Examples
 
 Waveform as viewed in Audacity:
 
-![Sine440HzRaisedCosineEnvelope](https://github.com/daijo/NamiLib/raw/master/examples/sine_440Hz_raised_cosine_envelope.png)
+![MorseDit](https://github.com/daijo/NamiLib/raw/master/examples/morse_dit.png)
+
+[Morse Dit (Ogg Vorbis)](https://github.com/daijo/NamiLib/raw/master/examples/morse_dit.ogg)
 
 ### PSK31 Zeros
 
@@ -152,7 +154,7 @@ Waveform as viewed in Audacity:
 
 ![Psk31Zeros](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.png)
 
-[Ogg Vorbis](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.ogg)
+[PSK31 Zeros (Ogg Vorbis)](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.ogg)
 
 ### FFT pass band filter
 
