@@ -15,12 +15,12 @@ Features
 * PCM _Frame_ to handle the samples.
 * _Fft_ using Ooura's FFT implementations.
 * _FrameWriter_ to write frames to a file.
+* _FrameReader_ to read frames from a file.
 
 Backlog
 -------
 
 * Waypoint periodic function.
-* File input.
 
 Build
 -----
@@ -61,6 +61,9 @@ The library provide a few building blocks that can be used to create wave forms.
 
 ### Signal processing
 
+    | FrameReader |
+          |
+          V
       | Frame |
           |
           V
