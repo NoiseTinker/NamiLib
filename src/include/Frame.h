@@ -25,23 +25,23 @@ typedef struct {
 	uint16_t used;
 } Frame;
 
-Frame* initFrame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size);
+Frame* nami_init_frame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size);
 
-uint16_t frameSize(Frame* frame);
+uint16_t nami_frame_size(Frame* frame);
 
-enum FrameEncoding frameEncoding(Frame* frame);
+enum FrameEncoding nami_frame_encoding(Frame* frame);
 
-size_t frameSampleDataSize(Frame* frame);
+size_t nami_frame_sample_size(Frame* frame);
 
-Frame* writeFrameDataSample(Frame* frame, double data, uint32_t index);
+Frame* nami_frame_write_sample(Frame* frame, double data, uint32_t index);
 
-uint8_t* frameUInt8Data(Frame* frame);
+uint8_t* nami_frame_uint8(Frame* frame);
 
-int16_t* frameSInt16Data(Frame* frame);
+int16_t* nami_frame_sint16(Frame* frame);
 
-float* frameFloatData(Frame* frame);
+float* nami_frame_float(Frame* frame);
 
-double* frameDoubleData(Frame* frame);
+double* nami_frame_double(Frame* frame);
 
 #endif
 

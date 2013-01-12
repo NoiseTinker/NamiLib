@@ -10,24 +10,22 @@ typedef struct {
 	double (*func)(double);
 } Periodic;
 
-double y(Periodic* pf, double x);
+double nami_periodic_y(Periodic* pf, double x);
 
-void setFunction(Periodic* pf, double (*func)(double));
+void nami_set_function(Periodic* pf, double (*func)(double));
 
-void addWayPoint(Periodic* pf, double x, double y);
-
-void clear(Periodic* pf);
+void nami_add_waypoint(Periodic* pf, double x, double y);
 
 /*
  * Functions map a position 0 <= x <= 2*PI to a value -1 <= y <= 1.
  */
 
-double sine_wave(double x);
+double nami_sine_wave(double x);
 
-double square_wave(double x);
+double nami_square_wave(double x);
 
-double triangle_wave(double x);
+double nami_triangle_wave(double x);
 
-double sawtooth_wave(double x);
+double nami_sawtooth_wave(double x);
 
 #endif

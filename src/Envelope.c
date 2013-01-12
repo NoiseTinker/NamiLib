@@ -8,52 +8,52 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-double envelopeY(Envelope* env, double t)
+double nami_envelope_y(Envelope* env, double t)
 {
 	return env->func(t, env->data);
 }
 
-void setEnvelopeFunction(Envelope* env, double (*func)(double, void*), void* data)
+void nami_set_envelope_function(Envelope* env, double (*func)(double, void*), void* data)
 {
 	env->func = func;
 	env->data = data;
 }
 
-double adsr(double t, void* data)
+double nami_adsr(double t, void* data)
 {
 	AdsrParameters* params = (AdsrParameters*)data;
 
-	double totalTime;
+	double total_time;
 	double result = 0;
 
-	if (t < (totalTime = params->attackTime)) {
-		result = t / params->attackTime;
-	} else if (t < ((totalTime = totalTime + params->decayTime))) {
-		result = 1 - (1 - params->sustainLevel) * ((t - params->attackTime) / params->decayTime);
-	} else if (t < ((totalTime = totalTime + params->sustainTime))) {
-		result = params->sustainLevel;
-	} else if (t < ((totalTime = totalTime + params->releaseTime))) {
-		result = params->sustainLevel * (1 - ((t - params->attackTime - params->decayTime - params->sustainTime) / params->releaseTime));
+	if (t < (total_time = params->attack_time)) {
+		result = t / params->attack_time;
+	} else if (t < ((total_time = total_time + params->decay_time))) {
+		result = 1 - (1 - params->sustain_level) * ((t - params->attack_time) / params->decay_time);
+	} else if (t < ((total_time = total_time + params->sustain_time))) {
+		result = params->sustain_level;
+	} else if (t < ((total_time = total_time + params->release_time))) {
+		result = params->sustain_level * (1 - ((t - params->attack_time - params->decay_time - params->sustain_time) / params->release_time));
 	}
 
 	return result;
 }
 
-double raisedCosine(double t, void* data)
+double nami_raised_cosine(double t, void* data)
 {
 	RaisedCosineParameters* params = (RaisedCosineParameters*)data;
 
-	double totalTime = params->riseTime + params->fallTime + params->sustainTime;
+	double total_time = params->rise_time + params->fall_time + params->sustain_time;
 	double result = 0;
 
-	if(t > 0 && t < totalTime) {
+	if(t > 0 && t < total_time) {
 
-		if(t < params->riseTime) {
+		if(t < params->rise_time) {
 			// Rise
-			result = 0.5 * (1 + cos(M_PI*(t/params->riseTime) - M_PI));
-		} else if (t > params->riseTime + params->sustainTime) {
+			result = 0.5 * (1 + cos(M_PI*(t/params->rise_time) - M_PI));
+		} else if (t > params->rise_time + params->sustain_time) {
 			// Fall
-			result = 0.5 * (1 + cos(M_PI*((t - params->riseTime + params->sustainTime)/params->fallTime)));
+			result = 0.5 * (1 + cos(M_PI*((t - params->rise_time + params->sustain_time)/params->fall_time)));
 		} else {
 			result = 1;
 		}

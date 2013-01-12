@@ -20,6 +20,8 @@ Features
 Backlog
 -------
 
+* Adding several _Periodic_ to a _Wave_
+* Goertzel algorithm
 * Waypoint periodic function.
 
 Build

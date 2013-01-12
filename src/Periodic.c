@@ -12,41 +12,36 @@ struct __Periodic
 	double (*func)(double);
 };
 
-double y(Periodic* pf, double x)
+double nami_periodic_y(Periodic* pf, double x)
 {
 	return pf->func(x);
 }
 
-void setFunction(Periodic* pf, double (*func)(double))
+void nami_set_function(Periodic* pf, double (*func)(double))
 {
 	 pf->func = func;
 }
 
-void addWayPoint(Periodic* pf, double x, double y)
+void nami_add_waypoint(Periodic* pf, double x, double y)
 {
 	/* Not yet implemented. */
-}
-
-void clear(Periodic* pf)
-{
-	pf->func = NULL;
 }
 
 /*
  * Functions map a position 0 <= x <= 2*PI to a value -1 <= y <= 1.
  */
 
-double sine_wave(double x)
+double nami_sine_wave(double x)
 {
 	return sin(x);
 }
 
-double square_wave(double x)
+double nami_square_wave(double x)
 {
 	return sin(x) > 0 ? 1 : -1;
 }
 
-double triangle_wave(double x)
+double nami_triangle_wave(double x)
 {
 	double x_mod_2pi = fmod(x, 2*M_PI);
 	double a = 1/M_PI_2;
@@ -63,7 +58,7 @@ double triangle_wave(double x)
 	return a*x + b;
 }
 
-double sawtooth_wave(double x)
+double nami_sawtooth_wave(double x)
 {
 	return (fmod(x, 2*M_PI)/M_PI) - 1;
 }

@@ -12,45 +12,45 @@
 #include "Fft.h"
 
 extern void cdft(int, int, double *, int *, double *);
-static void copyDataToSpectrum();
-static void copyDataToFrame();
+static void copy_to_spectrum();
+static void copy_to_frame();
 
-void fft(Frame* frame, ComplexNumber* spectrum)
+void nami_fft(Frame* frame, ComplexNumber* spectrum)
 {
-	uint16_t numFrequencies = frameSize(frame)/2;
+	uint16_t numFrequencies = nami_frame_size(frame)/2;
 	int ip[(2 + (int)ceil(sqrt(numFrequencies)))];
 	double w[numFrequencies];
 	ip[0] = 0;
 
 	assert(sizeof(ComplexNumber) * 2 == sizeof(double) * 4);
 
-	copyDataToSpectrum(frame, spectrum);
+	copy_to_spectrum(frame, spectrum);
 
 	// Call Ooura Complex Discrete Fourier Transform
-	cdft(frameSize(frame), 1, (double*)spectrum, ip, w);
+	cdft(nami_frame_size(frame), 1, (double*)spectrum, ip, w);
 }
 
-void ifft(ComplexNumber* spectrum, Frame* frame)
+void nami_ifft(ComplexNumber* spectrum, Frame* frame)
 {
-	uint16_t numFrequencies = frameSize(frame)/2;
+	uint16_t numFrequencies = nami_frame_size(frame)/2;
 	int ip[(2 + (int)ceil(sqrt(numFrequencies)))];
 	double w[numFrequencies];
 	ip[0] = 0;
 
 	// Call Ooura Complex Discrete Fourier Transform
-	cdft(frameSize(frame), -1, (double*)spectrum, ip, w);
+	cdft(nami_frame_size(frame), -1, (double*)spectrum, ip, w);
 
-	for (int j = 0; j <= frameSize(frame) - 1; j++) {
+	for (int j = 0; j <= nami_frame_size(frame) - 1; j++) {
 		spectrum[j].r *= 1.0 / numFrequencies;
 	}
 
-	copyDataToFrame(spectrum, frame);
+	copy_to_frame(spectrum, frame);
 }
 
-static void copyDataToSpectrum(Frame* frame, ComplexNumber* spectrum)
+static void copy_to_spectrum(Frame* frame, ComplexNumber* spectrum)
 {
-	uint16_t size = frameSize(frame);
-	double* data = frameDoubleData(frame);
+	uint16_t size = nami_frame_size(frame);
+	double* data = nami_frame_double(frame);
 
 	for (int i = 0; i < size; i++) {
 		spectrum[i].r = data[i];
@@ -58,10 +58,10 @@ static void copyDataToSpectrum(Frame* frame, ComplexNumber* spectrum)
 	}
 }
 
-static void copyDataToFrame(ComplexNumber* spectrum, Frame* frame)
+static void copy_to_frame(ComplexNumber* spectrum, Frame* frame)
 {
-	uint16_t size = frameSize(frame);
-	double* data = frameDoubleData(frame);
+	uint16_t size = nami_frame_size(frame);
+	double* data = nami_frame_double(frame);
 
 	for (int i = 0; i < size; i++) {
 		data[i] = spectrum[i].r;

@@ -14,17 +14,17 @@
 void TestReadSquareWave(CuTest* tc)
 {
 	Frame frame;
-	FrameReader frameReader;
+	FrameReader reader;
 	uint8_t data[FRAME_SIZE] = {0};
 
-	initFrame(&frame, UINT8, &data, FRAME_SIZE);
-	openFrameReader(&frameReader, "testdata/squarewave_f100Hz_sf8000Hz_uint8.raw");
+	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
+	nami_open_reader(&reader, "testdata/squarewave_f100Hz_sf8000Hz_uint8.raw");
 
-	while (readFrame(&frameReader, &frame) > 0) {
+	while (nami_read_frame(&reader, &frame) > 0) {
 
 		CuAssertTrue(tc, data[0] == 255);
 		CuAssertTrue(tc, data[40] == 0);
 	}
 
-	closeFrameReader(&frameReader);
+	nami_close_reader(&reader);
 }

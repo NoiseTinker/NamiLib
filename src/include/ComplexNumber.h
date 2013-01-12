@@ -21,21 +21,21 @@ typedef struct {
 } ComplexNumber;
 
 /* x + yi */
-void initComplexNumber(ComplexNumber* n, double r, double i);
+void nami_init_complexnumber(ComplexNumber* n, double r, double i);
 
-void setReal(ComplexNumber* n, double r);
+void nami_set_real(ComplexNumber* n, double r);
 
-void setImaginary(ComplexNumber* n, double i);
+void nami_set_imaginary(ComplexNumber* n, double i);
 
-double getReal(ComplexNumber* n);
+double nami_get_real(ComplexNumber* n);
 
-double getImaginary(ComplexNumber* n);
+double nami_get_imaginary(ComplexNumber* n);
 
-double getAbsolute(ComplexNumber* n);
+double nami_get_absolute(ComplexNumber* n);
 
 /* (x + yi)(u + vi) = (xu – yv) + (xv + yu)i */
-void mult(ComplexNumber* n1, ComplexNumber* n2, ComplexNumber* result);
+void nami_mult(ComplexNumber* n1, ComplexNumber* n2, ComplexNumber* result);
 
-void add(ComplexNumber* n1, ComplexNumber* n2, ComplexNumber* result);
+void nami_add(ComplexNumber* n1, ComplexNumber* n2, ComplexNumber* result);
 
 #endif

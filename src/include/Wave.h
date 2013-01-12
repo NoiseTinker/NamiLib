@@ -15,25 +15,25 @@ typedef struct {
 	Periodic* periodic;
 	double amplitude;
 	double phase;
-	double angularFrequency;
+	double angular_frequency;
 	Envelope* envelope;
 } Wave;
 
-double waveY(Wave* wave, double t);
+double nami_wave_y(Wave* wave, double t);
 
 /*
  * See https://en.wikipedia.org/wiki/Wave#Sinusoidal_waves
  */
-bool setPeriodic(Wave* wave, Periodic* periodic,
+bool nami_set_periodic(Wave* wave, Periodic* periodic,
 	double amplitude, double phase,
-	double angularFrequency);
+	double angular_frequency);
 
-void setEnvelope(Wave* wave, Envelope* envelope);
+void nami_set_envelope(Wave* wave, Envelope* envelope);
 
-void clearWave(Wave* wave);
+void nami_clear_wave(Wave* wave);
 
-double angularFrequencyFromFrequency(double frequency);
+double nami_angular_frequency_from_frequency(double frequency);
 
-double angularFrequencyFromPeriod(double period);
+double nami_angular_frequency_from_period(double period);
 
 #endif

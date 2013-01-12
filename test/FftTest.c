@@ -18,8 +18,8 @@ void TestFftFlatSignal(CuTest* tc)
 	double flat[FRAME_SIZE] = {0};
 	ComplexNumber spectrum[FRAME_SIZE];
 
-	initFrame(&frame, DOUBLE, flat, FRAME_SIZE);
-	fft(&frame, spectrum);
+	nami_init_frame(&frame, DOUBLE, flat, FRAME_SIZE);
+	nami_fft(&frame, spectrum);
 
 	for (int i = 0; i < FRAME_SIZE; i++) {
 		CuAssertTrue(tc, spectrum[i].r == 0);
@@ -33,15 +33,15 @@ void TestFftRossetaCode(CuTest* tc)
 	double flat[8] = {1, 1, 1, 1, 0, 0, 0, 0};
 	ComplexNumber spectrum[8];
 
-	initFrame(&frame, DOUBLE, flat, 8);
-	fft(&frame, spectrum);
+	nami_init_frame(&frame, DOUBLE, flat, 8);
+	nami_fft(&frame, spectrum);
 
-	CuAssertTrue(tc, getAbsolute(&spectrum[0]) == 4);
-	CuAssertTrue(tc, getAbsolute(&spectrum[1]) == 0);
-	CuAssertTrue(tc, getAbsolute(&spectrum[2]) == 0);
-	CuAssertTrue(tc, getAbsolute(&spectrum[3]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&spectrum[0]) == 4);
+	CuAssertTrue(tc, nami_get_absolute(&spectrum[1]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&spectrum[2]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&spectrum[3]) == 0);
 
-	double* data = frameDoubleData(&frame);
+	double* data = nami_frame_double(&frame);
 
 	data[0] = 666;
 	data[1] = 666;
@@ -52,7 +52,7 @@ void TestFftRossetaCode(CuTest* tc)
 	data[6] = 666;
 	data[7] = 666;
 
-	ifft(spectrum, &frame);
+	nami_ifft(spectrum, &frame);
 
 	CuAssertTrue(tc, data[0] == 1);
 	CuAssertTrue(tc, data[1] == 1);

@@ -5,56 +5,56 @@
 
 #include "Sampler.h"
 
-static double getNextSample(Sampler* sampler);
+static double get_next_sample(Sampler* sampler);
 
-void initSampler(Sampler* sampler,
+void nami_init_sampler(Sampler* sampler,
 			Wave* wave,
-			double sampleStartTime,
-			double sampleFinishTime,
-			uint32_t samplingFrequency)
+			double start_time,
+			double finish_time,
+			uint32_t sampling_frequency)
 {
 	sampler->wave = wave;
-	sampler->sampleStartTime = sampleStartTime;
-	sampler->sampleFinishTime = sampleFinishTime;
-	sampler->currentTime = sampleStartTime;
-	sampler->deltaTime = 1.0 / samplingFrequency;
+	sampler->start_time = start_time;
+	sampler->finish_time = finish_time;
+	sampler->current_time = start_time;
+	sampler->delta_time = 1.0 / sampling_frequency;
 }
 
-void setSampleInterval(Sampler* sampler, double sampleStartTime, double sampleFinishTime)
+void nami_set_sample_interval(Sampler* sampler, double start_time, double finish_time)
 {
-	sampler->sampleStartTime = sampleStartTime;
-	sampler->sampleFinishTime = sampleFinishTime;
+	sampler->start_time = start_time;
+	sampler->finish_time = finish_time;
 }
 
-void setCurrentSampleTime(Sampler* sampler, double currentTime)
+void nami_set_current_sample_time(Sampler* sampler, double current_time)
 {
-	sampler->currentTime = currentTime;
+	sampler->current_time = current_time;
 }
 
-Frame* fillFrame(Sampler* sampler, Frame* frame)
+Frame* nami_fill_frame(Sampler* sampler, Frame* frame)
 {
 
 	for (uint32_t i = 0; i < frame->size
-			&& sampler->currentTime <= sampler->sampleFinishTime; i++) {
+			&& sampler->current_time <= sampler->finish_time; i++) {
 
-		double value = getNextSample(sampler);
-		writeFrameDataSample(frame, value, i);
+		double value = get_next_sample(sampler);
+		nami_frame_write_sample(frame, value, i);
 	}
 
 	return frame;
 }
 
-uint32_t samplesLeft(Sampler* sampler)
+uint32_t nami_samples_left(Sampler* sampler)
 {
-	return (sampler->sampleFinishTime - sampler->currentTime) / sampler->deltaTime;
+	return (sampler->finish_time - sampler->current_time) / sampler->delta_time;
 }
 
-static double getNextSample(Sampler* sampler)
+static double get_next_sample(Sampler* sampler)
 {
 	double value = 0;
 
-	value = waveY(sampler->wave, sampler->currentTime);
-	sampler->currentTime += sampler->deltaTime;
+	value = nami_wave_y(sampler->wave, sampler->current_time);
+	sampler->current_time += sampler->delta_time;
 
 	return value;
 }

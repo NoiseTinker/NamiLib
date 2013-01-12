@@ -5,20 +5,20 @@
 
 #include "FrameReader.h"
 
-bool openFrameReader(FrameReader* frameReader, char* filename)
+bool nami_open_reader(FrameReader* reader, char* filename)
 {
-	frameReader->file = fopen(filename, "r");
+	reader->file = fopen(filename, "r");
 
-	return frameReader->file != NULL;
+	return reader->file != NULL;
 }
 
-bool closeFrameReader(FrameReader* frameReader)
+bool nami_close_reader(FrameReader* reader)
 {
-	return fclose(frameReader->file) == 0;
+	return fclose(reader->file) == 0;
 }
 
-size_t readFrame(FrameReader* frameReader, Frame* frame)
+size_t nami_read_frame(FrameReader* reader, Frame* frame)
 {
-	size_t samplesRead = fread(frame->data, frameSampleDataSize(frame), frame->size, frameReader->file);
+	size_t samplesRead = fread(frame->data, nami_frame_sample_size(frame), frame->size, reader->file);
 	return frame->used = samplesRead;
 }

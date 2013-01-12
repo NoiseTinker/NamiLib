@@ -11,24 +11,24 @@
 
 typedef struct {
 	Wave* wave;
-	double sampleStartTime;
-	double sampleFinishTime;
-	double deltaTime;
-	double currentTime;
+	double start_time;
+	double finish_time;
+	double delta_time;
+	double current_time;
 } Sampler;
 
-void initSampler(Sampler* sampler,
+void nami_init_sampler(Sampler* sampler,
 			Wave* wave,
-			double sampleStartTime,
-			double sampleFinishTime,
-			uint32_t samplingFrequency);
+			double start_time,
+			double finish_time,
+			uint32_t sampling_frequency);
 
-void setSampleInterval(Sampler* sampler, double sampleStartTime, double sampleFinishTime);
+void nami_set_sample_interval(Sampler* sampler, double start_time, double finish_time);
 
-void setCurrentSampleTime(Sampler* sampler, double currentTime);
+void nami_set_current_sample_time(Sampler* sampler, double current_time);
 
-Frame* fillFrame(Sampler* sampler, Frame* frame);
+Frame* nami_fill_frame(Sampler* sampler, Frame* frame);
 
-uint32_t samplesLeft(Sampler* sampler);
+uint32_t nami_samples_left(Sampler* sampler);
 
 #endif

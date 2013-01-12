@@ -17,16 +17,16 @@ void TestSampleSquareWave(CuTest* tc)
 	Sampler sampler;
 	Frame frame;
 	uint8_t data[FRAME_SIZE] = {0};
-	double angularFrequency = angularFrequencyFromFrequency(4);
+	double angularFrequency = nami_angular_frequency_from_frequency(4);
 
-	setFunction(&periodic, &square_wave);
-	setPeriodic(&wave, &periodic, 1, 0, angularFrequency);
-	initSampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
-	initFrame(&frame, UINT8, &data, FRAME_SIZE);
+	nami_set_function(&periodic, &nami_square_wave);
+	nami_set_periodic(&wave, &periodic, 1, 0, angularFrequency);
+	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
+	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
 
-	while (samplesLeft(&sampler) > 0) {
+	while (nami_samples_left(&sampler) > 0) {
 
-		fillFrame(&sampler, &frame);
+		nami_fill_frame(&sampler, &frame);
 
 		CuAssertTrue(tc, data[0] == 0);
 		CuAssertTrue(tc, data[1] == 255);

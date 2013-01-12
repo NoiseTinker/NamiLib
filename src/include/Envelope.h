@@ -11,9 +11,9 @@ typedef struct {
 	void* data;
 } Envelope;
 
-double envelopeY(Envelope* env, double t);
+double nami_envelope_y(Envelope* env, double t);
 
-void setEnvelopeFunction(Envelope* env, double (*func)(double, void*), void*);
+void nami_set_envelope_function(Envelope* env, double (*func)(double, void*), void*);
 
 /*
  *    /\
@@ -25,24 +25,24 @@ void setEnvelopeFunction(Envelope* env, double (*func)(double, void*), void*);
  *  https://en.wikipedia.org/wiki/Synthesizer#ADSR_envelope
  */
 typedef struct {
-	double attackTime;
-	double decayTime;
-	double sustainLevel;
-	double sustainTime;
-	double releaseTime;
+	double attack_time;
+	double decay_time;
+	double sustain_level;
+	double sustain_time;
+	double release_time;
 } AdsrParameters;
 
-double adsr(double t, void* data);
+double nami_adsr(double t, void* data);
 
 /*
  * https://en.wikipedia.org/wiki/Raised-cosine_filter
  */
 typedef struct {
-	double riseTime;
-	double fallTime;
-	double sustainTime;
+	double rise_time;
+	double fall_time;
+	double sustain_time;
 } RaisedCosineParameters;
 
-double raisedCosine(double t, void* data);
+double nami_raised_cosine(double t, void* data);
 
 #endif

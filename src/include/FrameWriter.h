@@ -14,10 +14,10 @@ typedef struct {
 	FILE* file;
 } FrameWriter;
 
-bool openFrameWriter(FrameWriter* frameWriter, char* filename);
+bool nami_open_writer(FrameWriter* writer, char* filename);
 
-bool closeFrameWriter(FrameWriter* frameWriter);
+bool nami_close_writer(FrameWriter* writer);
 
-size_t writeFrame(FrameWriter* frameWriter, Frame* frame);
+size_t nami_write_frame(FrameWriter* writer, Frame* frame);
 
 #endif

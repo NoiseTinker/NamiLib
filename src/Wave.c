@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <math.h>
 
-double waveY(Wave* wave, double t)
+double nami_wave_y(Wave* wave, double t)
 {	
-	double y = wave->amplitude * wave->periodic->func(wave->angularFrequency*t + wave->phase);
+	double y = wave->amplitude * wave->periodic->func(wave->angular_frequency*t + wave->phase);
 	double envelope = 1;
 
 	if (wave->envelope != NULL && wave->envelope->func != NULL) {
@@ -20,38 +20,38 @@ double waveY(Wave* wave, double t)
 	return envelope * y;;
 }
 
-bool setPeriodic(Wave* wave, Periodic* periodic,
+bool nami_set_periodic(Wave* wave, Periodic* periodic,
 	double amplitude, double phase,
-	double angularFrequency)
+	double angular_frequency)
 {
 	wave->periodic = periodic;
 	wave->amplitude = amplitude;
 	wave->phase = phase;
-	wave->angularFrequency = angularFrequency;
+	wave->angular_frequency = angular_frequency;
 
 	return true;
 }
 
-void setEnvelope(Wave* wave, Envelope* envelope)
+void nami_set_envelope(Wave* wave, Envelope* envelope)
 {
 	wave->envelope = envelope;
 }
 
-void clearWave(Wave* wave)
+void nami_clear_wave(Wave* wave)
 {
 	wave->periodic = NULL;
 	wave->amplitude = 0;
 	wave->phase = 0;
-	wave->angularFrequency = 0;
+	wave->angular_frequency = 0;
 }
 
-double angularFrequencyFromFrequency(double frequency)
+double nami_angular_frequency_from_frequency(double frequency)
 {
-	return 2*M_PI*frequency;
+	return 2 * M_PI * frequency;
 }
 
-double angularFrequencyFromPeriod(double period)
+double nami_angular_frequency_from_period(double period)
 {
-	return (2*M_PI) / period;
+	return (2 * M_PI) / period;
 }
 

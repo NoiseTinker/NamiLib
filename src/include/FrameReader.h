@@ -14,10 +14,10 @@ typedef struct {
 	FILE* file;
 } FrameReader;
 
-bool openFrameReader(FrameReader* frameReader, char* filename);
+bool nami_open_reader(FrameReader* reader, char* filename);
 
-bool closeFrameReader(FrameReader* frameReader);
+bool nami_close_reader(FrameReader* reader);
 
-size_t readFrame(FrameReader* frameReader, Frame* frame);
+size_t nami_read_frame(FrameReader* reader, Frame* frame);
 
 #endif

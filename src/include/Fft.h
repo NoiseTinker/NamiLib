@@ -16,8 +16,8 @@
 #include "Frame.h"
 #include "ComplexNumber.h"
 
-void fft(Frame* frame, ComplexNumber* spectrum);
+void nami_fft(Frame* frame, ComplexNumber* spectrum);
 
-void ifft(ComplexNumber* spectrum, Frame* frame);
+void nami_ifft(ComplexNumber* spectrum, Frame* frame);
 
 #endif

@@ -5,20 +5,20 @@
 
 #include "FrameWriter.h"
 
-bool openFrameWriter(FrameWriter* frameWriter, char* filename)
+bool nami_open_writer(FrameWriter* writer, char* filename)
 {
-	frameWriter->file = fopen(filename, "w");
+	writer->file = fopen(filename, "w");
 
-	return frameWriter->file != NULL;
+	return writer->file != NULL;
 }
 
-bool closeFrameWriter(FrameWriter* frameWriter)
+bool nami_close_writer(FrameWriter* writer)
 {
-	return fclose(frameWriter->file) == 0;
+	return fclose(writer->file) == 0;
 }
 
-size_t writeFrame(FrameWriter* frameWriter, Frame* frame)
+size_t nami_write_frame(FrameWriter* writer, Frame* frame)
 {
-	return fwrite(frame->data, frameSampleDataSize(frame), frame->used, frameWriter->file);
+	return fwrite(frame->data, nami_frame_sample_size(frame), frame->used, writer->file);
 }
 
