@@ -1,9 +1,9 @@
 NamiLib
 =======
 
-A library for basic signal generation and processing implemented in C.
+A small and simple library for basic signal generation and processing implemented in C.
 
-Written as exercise.
+Written to learn about DSP.
 
 Features
 --------
@@ -13,6 +13,7 @@ Features
 * Parameterized _Wave_ from periodic function and envelope.
 * _Sampler_ to take samples from a _Wave_.
 * PCM _Frame_ to handle the samples.
+* _Oscillator_ producing real or complex (IQ) signal.
 * _Fft_ using Ooura's FFT implementations.
 * _FrameWriter_ to write frames to a file.
 * _FrameReader_ to read frames from a file.
@@ -20,8 +21,13 @@ Features
 Backlog
 -------
 
-* Adding several _Periodic_ to a _Wave_
-* Goertzel algorithm
+* Rectangular, Hamming or Hanning _Window_.
+* _ComplexFrame_ for IQ signals.
+* _Stft_ to create waterfall displays etc.
+* _Demodulator_ and _Modulator_ for LSB, USB, CW and AM.
+* _FrameRecorder_ to record frames from sound card.
+* _FramePlayer_ to play frames to sound card.
+* Goertzel algorithm for DTMF detection.
 * Waypoint periodic function.
 
 Build
@@ -81,6 +87,18 @@ The library provide a few building blocks that can be used to create wave forms.
                     |
                     V
                 | Frame |
+
+    | FrameRecorder |          | Oscillator |
+           |                        |
+           V                        V
+    | ComplexFrame |         | ComplexFrame |
+           |                        |
+           \--> | Demodulator | <---/
+                       |
+                       V
+                   | Frame | -> | Stft | -> | ComplexFrame |
+                       |
+                | FramePlayer |
 
 Examples
 --------
