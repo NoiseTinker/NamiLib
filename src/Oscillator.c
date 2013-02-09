@@ -19,14 +19,14 @@ void nami_osc_init(Oscillator* oscillator,
 
 double nami_osc_y(Oscillator* oscillator)
 {
-	return sin(oscillator->angular_frequency * oscillator->current_time);
+	return cos(oscillator->angular_frequency * oscillator->current_time);
 }
 
 ComplexNumber nami_osc_cy(Oscillator* oscillator)
 {
 	ComplexNumber cy;
 	cy.r = nami_osc_y(oscillator);
-	cy.i = cos(oscillator->angular_frequency * oscillator->current_time);
+	cy.i = sin(oscillator->angular_frequency * oscillator->current_time);
 	return cy;
 }
 

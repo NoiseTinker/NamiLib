@@ -39,28 +39,28 @@ void TestRealAndImg(CuTest* tc)
 
 	nami_osc_init(&osc, 2*M_PI, 4);
 
-	CuAssertTrue(tc, nami_osc_y(&osc) == 0);
+	CuAssertTrue(tc, nami_osc_y(&osc) == 1);
 	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, cn.r == 0);
-	CuAssertTrue(tc, cn.i == 1);
+	CuAssertTrue(tc, cn.r == 1);
+	CuAssertTrue(tc, cn.i == 0);
+
+	nami_osc_tick(&osc);
+	cn = nami_osc_cy(&osc);
+	CuAssertTrue(tc, fabs(cn.r - 0 < 0.0001));
+	CuAssertTrue(tc, fabs(cn.i - 1 < 0.0001));
+
+	nami_osc_tick(&osc);
+	cn = nami_osc_cy(&osc);
+	CuAssertTrue(tc, fabs(cn.r - (-1) < 0.0001));
+	CuAssertTrue(tc, fabs(cn.i - 0) < 0.0001);
+
+	nami_osc_tick(&osc);
+	cn = nami_osc_cy(&osc);
+	CuAssertTrue(tc, fabs(cn.r - 0 < 0.0001));
+	CuAssertTrue(tc, fabs(cn.i - (-1)) < 0.0001);
 
 	nami_osc_tick(&osc);
 	cn = nami_osc_cy(&osc);
 	CuAssertTrue(tc, fabs(cn.r - 1) < 0.0001);
 	CuAssertTrue(tc, fabs(cn.i - 0) < 0.0001);
-
-	nami_osc_tick(&osc);
-	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - 0) < 0.0001);
-	CuAssertTrue(tc, fabs(cn.i - (-1)) < 0.0001);
-
-	nami_osc_tick(&osc);
-	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - (-1)) < 0.0001);
-	CuAssertTrue(tc, fabs(cn.i - 0) < 0.0001);
-
-	nami_osc_tick(&osc);
-	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - 0) < 0.0001);
-	CuAssertTrue(tc, fabs(cn.i - 1) < 0.0001);
 }
