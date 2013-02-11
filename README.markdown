@@ -183,6 +183,7 @@ Waveform as viewed in Audacity:
 
 Reference
 ---------
-<https://en.wikipedia.org/wiki/Wave>
-<https://en.wikipedia.org/wiki/Waveform>
-<http://www.kurims.kyoto-u.ac.jp/~ooura/fft.html>
+* <https://en.wikipedia.org/wiki/Wave>
+* <https://en.wikipedia.org/wiki/Waveform>
+* <http://www.kurims.kyoto-u.ac.jp/~ooura/fft.html>
+* <www.dspguru.com/sites/dspguru/files/QuadSignals.pdf>
