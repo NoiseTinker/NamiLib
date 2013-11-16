@@ -14,10 +14,6 @@ CC = gcc
 CFLAGS = -I$(IDIR) -Wall -Werror -pedantic -std=c99
 AR = ar
 
-ifdef MACH
-	MACH_ARG = -mmcu=$(MACH)
-endif
-
 # Files
 
 FFTIMPL = fftsg
@@ -31,13 +27,8 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = ComplexNumber.o Fft.o Periodic.o Envelope.o Wave.o Frame.o FrameWriter.o \
  FrameReader.o Sampler.o Oscillator.o fftsg.o
 
-ifdef CROSS_COMPILE
-	ODIR = $(OUTDIR)/$(CROSS_COMPILE)obj
-	OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-else
-	OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-	TESTOBJ = $(patsubst %,$(TESTODIR)/%,$(_OBJ))
-endif
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+TESTOBJ = $(patsubst %,$(TESTODIR)/%,$(_OBJ))
 
 _TESTS = FftTest.o PeriodicTest.o EnvelopeTest.o WaveTest.o SamplerTest.o \
  FrameWriterTest.o FrameReaderTest.o OscillatorTest.o CuTest.o AllTests.o
@@ -55,19 +46,17 @@ TESTS = $(patsubst %,$(TESTODIR)/%,$(_TESTS))
 	touch $@
 
 # Build
-#
-# make CROSS_COMPILE=avr- MACH=atmega328 for cross compile to AVR.
 
-main: $(OUTDIR)/$(CROSS_COMPILE)$(LIB)
+main: $(OUTDIR)/$(LIB)
 
 $(ODIR)/%.o: $(SRCDIR)/%.c $(DEPS) $(ODIR)/.d
-	$(CROSS_COMPILE)$(CC) -c -o $@ $< $(CFLAGS) $(MACH_ARG)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/fftsg.o: $(FFTSRCDIR)/$(FFTIMPL).c $(ODIR)/.d
-	$(CROSS_COMPILE)$(CC) -c -o $@ $< $(CFLAGS) $(MACH_ARG)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(OUTDIR)/$(CROSS_COMPILE)$(LIB): $(OBJ) $(OUTDIR)/.d
-	$(CROSS_COMPILE)$(AR) rs $@ $^
+$(OUTDIR)/$(LIB): $(OBJ) $(OUTDIR)/.d
+	$(AR) rs $@ $^
 
 # Test
 

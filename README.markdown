@@ -1,9 +1,9 @@
 NamiLib
 =======
 
-A small and simple library for basic signal generation and processing implemented in C.
+A small and simple library for basic signal generation, processing and software defined radio implemented in C.
 
-Written to learn about DSP.
+Written to learn about DSP and SDR.
 
 Features
 --------
@@ -21,23 +21,28 @@ Features
 Backlog
 -------
 
-* Rectangular, Hamming or Hanning _Window_.
-* _ComplexFrame_ for IQ signals.
-* _Stft_ to create waterfall displays etc.
-* _Demodulator_ and _Modulator_ for LSB, USB, CW and AM.
-* _FrameRecorder_ to record frames from sound card.
 * _FramePlayer_ to play frames to sound card.
+* _FrameRecorder_ to record frames from sound card or rtl-sdr.
+* _ComplexFrame_ for IQ signals.
+* _Demodulator_ and _Modulator_ for LSB, USB, CW and AM.
+* _Stft_ to create waterfall displays etc.
+* _CircularBuffer_ for stream buffering.
+* _PacedBuffer_ for stream buffering.
+* Rectangular, Hamming or Hanning _Window_.
 * Goertzel algorithm for DTMF detection.
 * Waypoint periodic function.
+
+Dependencies
+------------
+
+Depends on portaudio and rtl-sdr.
+
+    sudo port install portaudio rtl-sdr
 
 Build
 -----
 
     make
-
-To cross-compile for e.g. AVR:
-
-    make CROSS_COMPILE=avr- MACH=atmega328
 
 Test
 ----
@@ -88,7 +93,18 @@ The library provide a few building blocks that can be used to create wave forms.
                     V
                 | Frame |
 
-    | FrameRecorder |          | Oscillator |
+### Software Define Radio
+
+    | FrameRecorder |
+           |
+           V
+       | Frame |
+           |
+           V
+    | Deinterlacer |  
+           |
+           V
+     | DcRemover |           | Oscillator |
            |                        |
            V                        V
     | ComplexFrame |         | ComplexFrame |
@@ -98,7 +114,33 @@ The library provide a few building blocks that can be used to create wave forms.
                        V
                    | Frame | -> | Stft | -> | ComplexFrame |
                        |
+                       V
+               | CircularBuffer |
+                       |
+                       V
                 | FramePlayer |
+
+### Streams
+
+                                   | FrameReader |
+                                         |
+                                         V
+    | FrameRecorder |              | PacedBuffer |
+            |                            |
+            V                            V
+        | Frame |                    | Frame |
+            |                            |
+            \--------------*-------------/
+                           |
+                          ...
+                           |
+                           V
+            /--------------*-------------\
+            |                            |
+    | CircularBuffer |            | FrameWriter |
+            |
+            V
+     | FramePlayer |
 
 Examples
 --------
