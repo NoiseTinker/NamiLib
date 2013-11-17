@@ -235,3 +235,4 @@ Reference
 * <http://www.portaudio.com/docs.html>
 * <http://sdr.osmocom.org/trac/wiki/rtl-sdr>
 * <http://www.dspguru.com/sites/dspguru/files/QuadSignals.pdf>
+* <http://www.digitalsignallabs.com/Digradio.pdf>
