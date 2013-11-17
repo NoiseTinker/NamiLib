@@ -26,8 +26,6 @@ Backlog
 * _ComplexFrame_ for IQ signals.
 * _Demodulator_ and _Modulator_ for LSB, USB, CW and AM.
 * _Stft_ to create waterfall displays etc.
-* _CircularBuffer_ for stream buffering.
-* _PacedBuffer_ for stream buffering.
 * Rectangular, Hamming or Hanning _Window_.
 * Goertzel algorithm for DTMF detection.
 * Waypoint periodic function.
@@ -52,7 +50,7 @@ Test
 Building blocks
 ---------------
 
-The library provide a few building blocks that can be used to create wave forms.
+The library provide a few building blocks.
 
 ### Wave form synthesis
 
@@ -104,7 +102,7 @@ The library provide a few building blocks that can be used to create wave forms.
     | Deinterlacer |  
            |
            V
-     | DcRemover |           | Oscillator |
+     | DcRemover |            | Oscillator |
            |                        |
            V                        V
     | ComplexFrame |         | ComplexFrame |
@@ -115,17 +113,11 @@ The library provide a few building blocks that can be used to create wave forms.
                    | Frame | -> | Stft | -> | ComplexFrame |
                        |
                        V
-               | CircularBuffer |
-                       |
-                       V
                 | FramePlayer |
 
 ### Streams
 
-                                   | FrameReader |
-                                         |
-                                         V
-    | FrameRecorder |              | PacedBuffer |
+    | FrameRecorder |              | FrameReader |
             |                            |
             V                            V
         | Frame |                    | Frame |
@@ -137,10 +129,7 @@ The library provide a few building blocks that can be used to create wave forms.
                            V
             /--------------*-------------\
             |                            |
-    | CircularBuffer |            | FrameWriter |
-            |
-            V
-     | FramePlayer |
+    | FramePlayer |                | FrameWriter |
 
 Examples
 --------
@@ -243,4 +232,6 @@ Reference
 * <https://en.wikipedia.org/wiki/Wave>
 * <https://en.wikipedia.org/wiki/Waveform>
 * <http://www.kurims.kyoto-u.ac.jp/~ooura/fft.html>
-* <www.dspguru.com/sites/dspguru/files/QuadSignals.pdf>
+* <http://www.portaudio.com/docs.html>
+* <http://sdr.osmocom.org/trac/wiki/rtl-sdr>
+* <http://www.dspguru.com/sites/dspguru/files/QuadSignals.pdf>
