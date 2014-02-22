@@ -32,9 +32,9 @@ bool nami_start_player(FramePlayer* frameplayer);
 
 void nami_close_player(FramePlayer* player);
 
-size_t nami_write_player(FramePlayer* frameplayer, Frame* frame);
+size_t nami_play_frame(FramePlayer* frameplayer, Frame* frame);
 
 /* Can check this before write if need to avoid blocking. */
-bool nami_can_write_player(FramePlayer* frameplayer);
+bool nami_can_play_frame(FramePlayer* frameplayer);
 
 #endif

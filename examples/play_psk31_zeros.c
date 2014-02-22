@@ -47,7 +47,7 @@ int main()
 		while (nami_samples_left(&sampler) > 0) {
 
 			nami_fill_frame(&sampler, &frame);
-			nami_write_player(&player, &frame);
+			nami_play_frame(&player, &frame);
 		}
 
 		wave.phase += M_PI;

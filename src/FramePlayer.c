@@ -81,7 +81,7 @@ void nami_close_player(FramePlayer* frameplayer)
 	Pa_Terminate(); // Move to AudioContext?
 }
 
-size_t nami_write_player(FramePlayer* frameplayer, Frame* frame)
+size_t nami_play_frame(FramePlayer* frameplayer, Frame* frame)
 {
 	PaError err;
 
@@ -98,7 +98,7 @@ size_t nami_write_player(FramePlayer* frameplayer, Frame* frame)
 	return 0;
 }
 
-bool nami_can_write_player(FramePlayer* frameplayer)
+bool nami_can_play_frame(FramePlayer* frameplayer)
 {
 	return true; // TODO: check via stream API
 }

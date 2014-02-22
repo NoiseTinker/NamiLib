@@ -17,14 +17,15 @@ Features
 * _Fft_ using Ooura's FFT implementations.
 * _FrameWriter_ to write frames to a file.
 * _FrameReader_ to read frames from a file.
+* _FramePlayer_ to play frames to sound card.
 
 Backlog
 -------
 
-* _FramePlayer_ to play frames to sound card.
+* _Gain_ applies gain to a frame.
 * _FrameRecorder_ to record frames from sound card or rtl-sdr.
 * _ComplexFrame_ for IQ signals.
-* _Demodulator_ and _Modulator_ for LSB, USB, CW and AM.
+* _Demodulator_ and _Modulator_ for SSB, CW, AM and FM.
 * _Stft_ to create waterfall displays etc.
 * Rectangular, Hamming or Hanning _Window_.
 * Goertzel algorithm for DTMF detection.
