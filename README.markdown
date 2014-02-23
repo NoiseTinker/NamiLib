@@ -13,6 +13,7 @@ Features
 * Parameterized _Wave_ from periodic function and envelope.
 * _Sampler_ to take samples from a _Wave_.
 * PCM _Frame_ to handle the samples.
+* _Gain_ applies gain to a frame. 
 * _Oscillator_ producing real or complex (IQ) signal.
 * _Fft_ using Ooura's FFT implementations.
 * _FrameWriter_ to write frames to a file.
@@ -22,7 +23,7 @@ Features
 Backlog
 -------
 
-* _Gain_ applies gain to a frame. Also measures average level and DC offset.
+* _Gain_ Also measures average level and DC offset.
 * _AGC_ automatic gain control.
 * _FrameRecorder_ to record frames from sound card or rtl-sdr.
 * _ComplexFrame_ for IQ signals.
