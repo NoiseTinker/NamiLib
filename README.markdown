@@ -22,7 +22,8 @@ Features
 Backlog
 -------
 
-* _Gain_ applies gain to a frame.
+* _Gain_ applies gain to a frame. Also measures average level and DC offset.
+* _AGC_ automatic gain control.
 * _FrameRecorder_ to record frames from sound card or rtl-sdr.
 * _ComplexFrame_ for IQ signals.
 * _Demodulator_ and _Modulator_ for SSB, CW, AM and FM.
@@ -47,6 +48,11 @@ Test
 ----
 
     make test
+
+Build Example
+-------------
+
+    gcc -I../src/include -lportaudio ../out/libNami.a play_sdr.c -o play_sdr
 
 Building blocks
 ---------------
@@ -100,10 +106,13 @@ The library provide a few building blocks.
        | Frame |
            |
            V
-    | Deinterlacer |  
+        | AGC |
            |
            V
-     | DcRemover |            | Oscillator |
+     | DcRemover | 
+           |
+           V
+    | Deinterlacer |          | Oscillator |
            |                        |
            V                        V
     | ComplexFrame |         | ComplexFrame |

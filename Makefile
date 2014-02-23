@@ -20,17 +20,17 @@ FFTIMPL = fftsg
 
 LIB = libNami.a
 
-_DEPS = ComplexNumber.h Fft.h Periodic.h Envelope.h Wave.h Frame.h FrameWriter.h \
+_DEPS = Gain.h ComplexNumber.h Fft.h Periodic.h Envelope.h Wave.h Frame.h FrameWriter.h \
  FrameReader.h FramePlayer.h Sampler.h Oscillator.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = ComplexNumber.o Fft.o Periodic.o Envelope.o Wave.o Frame.o FrameWriter.o \
+_OBJ = Gain.o ComplexNumber.o Fft.o Periodic.o Envelope.o Wave.o Frame.o FrameWriter.o \
  FrameReader.o FramePlayer.o Sampler.o Oscillator.o fftsg.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 TESTOBJ = $(patsubst %,$(TESTODIR)/%,$(_OBJ))
 
-_TESTS = FftTest.o PeriodicTest.o EnvelopeTest.o WaveTest.o SamplerTest.o \
+_TESTS = GainTest.o FftTest.o PeriodicTest.o EnvelopeTest.o WaveTest.o SamplerTest.o \
  FrameWriterTest.o FrameReaderTest.o OscillatorTest.o CuTest.o AllTests.o
 TESTS = $(patsubst %,$(TESTODIR)/%,$(_TESTS))
 
