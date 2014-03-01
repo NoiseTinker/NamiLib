@@ -10,31 +10,24 @@
 
 #include "Frame.h"
 #include <stdbool.h>
-
-enum SourceType {
-        PORTAUDIO,
-        SOCKET
-};
+#include <portaudio.h>
 
 typedef struct {
-	enum SourceType type;
-	/* socket input */
-	int socket_fd;
-	/* portaudio input */
 	int sample_rate;
 	int nbr_channels;
 	int frame_size;
 } FrameRecorderOptions;
 
 typedef struct {
-	enum SourceType type;
-	/* socket input */
-	int socket_fd;
+        PaStreamParameters outputParameters;
+        PaStream *stream;
 } FrameRecorder;
 
 bool nami_open_recorder(FrameRecorder* recorder, FrameRecorderOptions options);
 
 void nami_close_recorder(FrameRecorder* recorder);
+
+bool nami_recorder_available(FrameRecorder* recorder);
 
 size_t nami_record_frame(FrameRecorder* recorder, Frame* frame);
 

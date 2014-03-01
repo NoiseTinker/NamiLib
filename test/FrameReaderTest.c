@@ -15,10 +15,14 @@ void TestReadSquareWave(CuTest* tc)
 {
 	Frame frame;
 	FrameReader reader;
+	FrameReaderOptions options;
 	uint8_t data[FRAME_SIZE] = {0};
 
+	options.type = FILE_TYPE;
+	options.filename = "testdata/squarewave_f100Hz_sf8000Hz_uint8.raw";
+
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
-	nami_open_reader(&reader, "testdata/squarewave_f100Hz_sf8000Hz_uint8.raw");
+	nami_open_reader(&reader, options);
 
 	while (nami_read_frame(&reader, &frame) > 0) {
 

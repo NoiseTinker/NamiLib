@@ -17,9 +17,8 @@ Features
 * _Oscillator_ producing real or complex (IQ) signal.
 * _Fft_ using Ooura's FFT implementations.
 * _FrameWriter_ to write frames to a file.
-* _FrameReader_ to read frames from a file.
+* _FrameReader_ to read frames from a file or socket.
 * _FramePlayer_ to play frames to sound card.
-* _FrameRecorder_ to record frames from socket.
 
 Backlog
 -------
