@@ -27,11 +27,11 @@ void TestGainLevel(CuTest* tc)
 	CuAssertTrue(tc, nami_level_from_sint16(-INT16_MAX) == 0);
 	CuAssertTrue(tc, nami_level_from_sint16(INT16_MAX) == 0);
 
-	CuAssertTrue(tc, nami_level_from_float(-FLT_MAX) == 0);
-	CuAssertTrue(tc, nami_level_from_float(FLT_MAX) == 0);
+	CuAssertTrue(tc, nami_level_from_float(-1) == 0);
+	CuAssertTrue(tc, nami_level_from_float(1) == 0);
 
-	CuAssertTrue(tc, nami_level_from_double(-DBL_MAX) == 0);
-	CuAssertTrue(tc, nami_level_from_double(DBL_MAX) == 0);
+	CuAssertTrue(tc, nami_level_from_double(-1) == 0);
+	CuAssertTrue(tc, nami_level_from_double(1) == 0);
 }
 
 void TestGainApply(CuTest* tc)

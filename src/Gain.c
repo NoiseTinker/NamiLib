@@ -66,12 +66,12 @@ float nami_level_from_sint16(int16_t value)
 
 float nami_level_from_float(float value)
 {
-	return 20 * log10(fabs(value) / FLT_MAX);
+	return 20 * log10(fabs(value) / 1);
 }
 
 float nami_level_from_double(double value)
 {
-	return 20 * log10(fabs(value) / DBL_MAX);
+	return 20 * log10(fabs(value) / 1);
 }
 
 uint8_t nami_apply_gain_uint8(uint8_t value, double gainFactor)
