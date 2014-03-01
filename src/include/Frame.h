@@ -21,11 +21,11 @@ enum FrameEncoding {
 typedef struct {
 	enum FrameEncoding encoding;
 	void* data;
-	uint16_t size;
-	uint16_t used;
+	size_t size;
+	size_t used;
 } Frame;
 
-Frame* nami_init_frame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size);
+Frame* nami_init_frame(Frame* frame, enum FrameEncoding encoding, void* data, size_t size);
 
 uint16_t nami_frame_size(Frame* frame);
 
@@ -33,7 +33,7 @@ enum FrameEncoding nami_frame_encoding(Frame* frame);
 
 size_t nami_frame_sample_size(Frame* frame);
 
-Frame* nami_frame_write_sample(Frame* frame, double data, uint32_t index);
+Frame* nami_frame_write_sample(Frame* frame, double data, size_t index);
 
 uint8_t* nami_frame_uint8(Frame* frame);
 

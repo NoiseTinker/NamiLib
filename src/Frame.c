@@ -8,7 +8,7 @@
 #include "Frame.h"
 #include <stdio.h>
 
-Frame* nami_init_frame(Frame* frame, enum FrameEncoding encoding, void* data, uint16_t size)
+Frame* nami_init_frame(Frame* frame, enum FrameEncoding encoding, void* data, size_t size)
 {
 	frame->encoding = encoding;
 	frame->data = data;
@@ -54,7 +54,7 @@ size_t nami_frame_sample_size(Frame* frame)
 	return size;
 }
 
-Frame* nami_frame_write_sample(Frame* frame, double data, uint32_t index)
+Frame* nami_frame_write_sample(Frame* frame, double data, size_t index)
 {
 
 	switch (frame->encoding) {

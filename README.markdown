@@ -19,13 +19,14 @@ Features
 * _FrameWriter_ to write frames to a file.
 * _FrameReader_ to read frames from a file.
 * _FramePlayer_ to play frames to sound card.
+* _FrameRecorder_ to record frames from socket.
 
 Backlog
 -------
 
 * _Gain_ Also measures average level and DC offset.
 * _AGC_ automatic gain control.
-* _FrameRecorder_ to record frames from sound card or rtl-sdr.
+* _FrameRecorder_ to record frames from sound card.
 * _ComplexFrame_ for IQ signals.
 * _Demodulator_ and _Modulator_ for SSB, CW, AM and FM.
 * _Stft_ to create waterfall displays etc.
