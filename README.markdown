@@ -19,15 +19,15 @@ Features
 * _FrameWriter_ to write frames to a file.
 * _FrameReader_ to read frames from a file or socket.
 * _FramePlayer_ to play frames to sound card.
+* _Demodulator_ for SSB/CW and AM.
 
 Backlog
 -------
 
-* _Gain_ Also measures average level and DC offset.
+* _Demodulator_ for FM.
+* _Modulator_ for SSB/CW, AM and FM.
 * _AGC_ automatic gain control.
 * _FrameRecorder_ to record frames from sound card.
-* _ComplexFrame_ for IQ signals.
-* _Demodulator_ and _Modulator_ for SSB, CW, AM and FM.
 * _Stft_ to create waterfall displays etc.
 * Rectangular, Hamming or Hanning _Window_.
 * Goertzel algorithm for DTMF detection.
@@ -107,16 +107,7 @@ The library provide a few building blocks.
        | Frame |
            |
            V
-        | AGC |
-           |
-           V
-     | DcRemover | 
-           |
-           V
-    | Deinterlacer |          | Oscillator |
-           |                        |
-           V                        V
-    | ComplexFrame |         | ComplexFrame |
+        | AGC |               | Oscillator |
            |                        |
            \--> | Demodulator | <---/
                        |
@@ -235,8 +226,6 @@ Waveform as viewed in Audacity:
 ![Psk31Zeros](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.png)
 
 [PSK31 Zeros (Ogg Vorbis)](https://github.com/daijo/NamiLib/raw/master/examples/psk31_zeros.ogg)
-
-### FFT pass band filter
 
 Reference
 ---------

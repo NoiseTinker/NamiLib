@@ -80,6 +80,32 @@ Frame* nami_frame_write_sample(Frame* frame, double data, size_t index)
 	return frame;
 }
 
+double nami_frame_read_sample(Frame* frame, size_t index)
+{
+	double sample = 0;
+
+	switch (frame->encoding) {
+
+		case UINT8:
+		sample = ((uint8_t*)frame->data)[index];
+		sample = (2 * (sample / UINT8_MAX)) - 1;
+		break;
+		case SINT16:
+		sample = ((int16_t*)frame->data)[index] / (1.0 * INT16_MAX);
+		break;
+		case FLOAT:
+		sample = ((float*)frame->data)[index];
+		break;
+		case DOUBLE:
+		sample = ((double*)frame->data)[index];
+		break;
+		default:
+		break;
+	}
+
+	return sample;
+}
+
 uint8_t* nami_frame_uint8(Frame* frame)
 {
 	if(frame->encoding == UINT8) {

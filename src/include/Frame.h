@@ -35,6 +35,8 @@ size_t nami_frame_sample_size(Frame* frame);
 
 Frame* nami_frame_write_sample(Frame* frame, double data, size_t index);
 
+double nami_frame_read_sample(Frame* frame, size_t index);
+
 uint8_t* nami_frame_uint8(Frame* frame);
 
 int16_t* nami_frame_sint16(Frame* frame);
