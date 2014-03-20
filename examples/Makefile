@@ -35,4 +35,3 @@ $(OUTDIR)/%: $(SRCDIR)/%.c $(OUTDIR)/.d
 
 clean:
 	rm -rf $(OUTDIR)
-	rm *.raw
