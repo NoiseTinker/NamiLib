@@ -19,6 +19,8 @@ typedef struct {
 	Envelope* envelope;
 } Wave;
 
+void nami_init_wave(Wave* wave);
+
 double nami_wave_y(Wave* wave, double t);
 
 /*
@@ -29,8 +31,6 @@ bool nami_set_periodic(Wave* wave, Periodic* periodic,
 	double angular_frequency);
 
 void nami_set_envelope(Wave* wave, Envelope* envelope);
-
-void nami_clear_wave(Wave* wave);
 
 double nami_angular_frequency_from_frequency(double frequency);
 

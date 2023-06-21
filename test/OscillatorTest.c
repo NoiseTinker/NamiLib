@@ -6,6 +6,7 @@
 #include "CuTest.h"
 #include "Oscillator.h"
 #include <math.h>
+#include <stdlib.h>
 
 void TestInitAndTick(CuTest* tc)
 {
@@ -46,17 +47,17 @@ void TestRealAndImg(CuTest* tc)
 
 	nami_osc_tick(&osc);
 	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - 0 < 0.0001));
-	CuAssertTrue(tc, fabs(cn.i - 1 < 0.0001));
+	CuAssertTrue(tc, fabs(cn.r - 0) < 0.0001);
+	CuAssertTrue(tc, fabs(cn.i - 1) < 0.0001);
 
 	nami_osc_tick(&osc);
 	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - (-1) < 0.0001));
+	CuAssertTrue(tc, fabs(cn.r - (-1)) < 0.0001);
 	CuAssertTrue(tc, fabs(cn.i - 0) < 0.0001);
 
 	nami_osc_tick(&osc);
 	cn = nami_osc_cy(&osc);
-	CuAssertTrue(tc, fabs(cn.r - 0 < 0.0001));
+	CuAssertTrue(tc, fabs(cn.r - 0) < 0.0001);
 	CuAssertTrue(tc, fabs(cn.i - (-1)) < 0.0001);
 
 	nami_osc_tick(&osc);

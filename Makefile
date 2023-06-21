@@ -10,7 +10,7 @@ IDIR = ./src/include
 
 # Toolchain
 
-CC = gcc
+CC = clang
 CFLAGS = -I$(IDIR) -Wall -Werror -pedantic -std=c99
 AR = ar
 
@@ -50,13 +50,14 @@ TESTS = $(patsubst %,$(TESTODIR)/%,$(_TESTS))
 main: $(OUTDIR)/$(LIB)
 
 $(ODIR)/%.o: $(SRCDIR)/%.c $(DEPS) $(ODIR)/.d
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -g -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/fftsg.o: $(FFTSRCDIR)/$(FFTIMPL).c $(ODIR)/.d
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -g -c -o $@ $< $(CFLAGS)
 
 $(OUTDIR)/$(LIB): $(OBJ) $(OUTDIR)/.d
 	$(AR) rs $@ $^
+	$(AR) d $@ .d
 
 # Test
 
@@ -70,16 +71,17 @@ $(TESTDIR)/AllTests.c: $(TESTDIR)/*.c
 	$(TESTDIR)/make-tests.sh $(TESTDIR)/*.c > $(TESTDIR)/AllTests.c
 
 $(TESTODIR)/%.o: $(TESTDIR)/%.c $(DEPS) $(TESTODIR)/.d $(TESTDIR)/AllTests.c
-	clang -c -o $@ $< $(CFLAGS)
+	$(CC) -g -c -o $@ $< $(CFLAGS)
 
 $(TESTODIR)/%.o: $(SRCDIR)/%.c $(DEPS) $(TESTODIR)/.d
-	clang -c -o $@ $< $(CFLAGS) -fprofile-arcs -ftest-coverage
+	$(CC) -g -c -o $@ $< $(CFLAGS) -fprofile-arcs -ftest-coverage
 
 $(TESTODIR)/fftsg.o: $(FFTSRCDIR)/$(FFTIMPL).c $(TESTODIR)/.d
-	clang -c -o $@ $< $(CFLAGS) -fprofile-arcs -ftest-coverage
+	$(CC) -g -c -o $@ $< $(CFLAGS) -fprofile-arcs -ftest-coverage
 
 $(OUTDIR)/test-$(LIB): $(TESTOBJ) $(OUTDIR)/.d
 	$(AR) rs $@ $^
+	$(AR) d $@ .d
 
 # Profile
 
@@ -90,7 +92,7 @@ $(OUTDIR)/profile.log: $(OUTDIR)/callgrind
 	cat $@
 
 $(OUTDIR)/callgrind: $(OUTDIR)/test-$(LIB) gentests $(TESTS)
-	clang $(TESTS) -o $(OUTDIR)/run-all-tests -I./test $(CFLAGS) $(OUTDIR)/test-$(LIB) -fprofile-arcs -ftest-coverage
+	$(CC) $(TESTS) -o $(OUTDIR)/run-all-tests -I./test $(CFLAGS) $(OUTDIR)/test-$(LIB) -fprofile-arcs -ftest-coverage
 	valgrind --dsymutil=yes --tool=callgrind --callgrind-out-file=$@ $(OUTDIR)/run-all-tests
 
 # Clean

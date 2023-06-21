@@ -39,16 +39,16 @@ int main() {
 	player_options.nbr_channels = 1;
 	player_options.frame_size = AUDIO_FRAME_SIZE;
 
-        int16_t iq_data[IQ_FRAME_SIZE] = {0};
-        nami_init_frame(&iq_frame, SINT16, &iq_data, IQ_FRAME_SIZE);
+    int16_t iq_data[IQ_FRAME_SIZE] = {0};
+    nami_init_frame(&iq_frame, SINT16, &iq_data, IQ_FRAME_SIZE);
 	int16_t audio_data[AUDIO_FRAME_SIZE] = {0};
-        nami_init_frame(&audio_frame, SINT16, &audio_data, AUDIO_FRAME_SIZE);
+    nami_init_frame(&audio_frame, SINT16, &audio_data, AUDIO_FRAME_SIZE);
 
 	nami_init_gain(&gain);
 	nami_osc_init(&bfo, nami_angular_frequency_from_frequency(BFO_FREQ), SAMPLE_RATE);
 	nami_demod_init(&demod, &bfo, &nami_demod_usb);
 
-        nami_open_reader(&reader, reader_options);
+    nami_open_reader(&reader, reader_options);
 	nami_open_player(&player, player_options);
 
 	// Loop until done

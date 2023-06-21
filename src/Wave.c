@@ -8,8 +8,19 @@
 #include <stdio.h>
 #include <math.h>
 
+void nami_init_wave(Wave* wave)
+{
+	wave->periodic = NULL;
+	wave->envelope = NULL;
+	wave->amplitude = 0;
+	wave->phase = 0;
+	wave->angular_frequency = 0;
+}
+
 double nami_wave_y(Wave* wave, double t)
-{	
+{
+	if(wave->periodic == NULL) { return 0; }
+	
 	double y = wave->amplitude * wave->periodic->func(wave->angular_frequency*t + wave->phase);
 	double envelope = 1;
 
@@ -17,7 +28,7 @@ double nami_wave_y(Wave* wave, double t)
 		envelope = wave->envelope->func(t, wave->envelope->data);
 	}
 	
-	return envelope * y;;
+	return envelope * y;
 }
 
 bool nami_set_periodic(Wave* wave, Periodic* periodic,
@@ -35,14 +46,6 @@ bool nami_set_periodic(Wave* wave, Periodic* periodic,
 void nami_set_envelope(Wave* wave, Envelope* envelope)
 {
 	wave->envelope = envelope;
-}
-
-void nami_clear_wave(Wave* wave)
-{
-	wave->periodic = NULL;
-	wave->amplitude = 0;
-	wave->phase = 0;
-	wave->angular_frequency = 0;
 }
 
 double nami_angular_frequency_from_frequency(double frequency)

@@ -16,30 +16,43 @@ void TestFftFlatSignal(CuTest* tc)
 {
 	Frame frame;
 	double flat[FRAME_SIZE] = {0};
-	ComplexNumber spectrum[FRAME_SIZE];
+	ComplexNumber fCoeffs[FRAME_SIZE];
 
 	nami_init_frame(&frame, DOUBLE, flat, FRAME_SIZE);
-	nami_fft(&frame, spectrum);
+	nami_fft(&frame, fCoeffs);
 
 	for (int i = 0; i < FRAME_SIZE; i++) {
-		CuAssertTrue(tc, spectrum[i].r == 0);
-		CuAssertTrue(tc, spectrum[i].i == 0);
+		CuAssertTrue(tc, fCoeffs[i].r == 0);
+		CuAssertTrue(tc, fCoeffs[i].i == 0);
 	}
 }
+
+
+void TestFftTopFrequencyEven(CuTest* tc)
+{
+	CuAssertTrue(tc, nami_fft_top_freq(200, 10) == 100);
+}
+
+void TestFftTopFrequencyOdd(CuTest* tc)
+{
+	CuAssertTrue(tc, nami_fft_top_freq(200, 11) - 90.909091 < 0.00001);
+}
+
+// Remove below? ->
 
 void TestFftRossetaCode(CuTest* tc)
 {
 	Frame frame;
 	double flat[8] = {1, 1, 1, 1, 0, 0, 0, 0};
-	ComplexNumber spectrum[8];
+	ComplexNumber fCoeffs[8];
 
 	nami_init_frame(&frame, DOUBLE, flat, 8);
-	nami_fft(&frame, spectrum);
+	nami_fft(&frame, fCoeffs);
 
-	CuAssertTrue(tc, nami_get_absolute(&spectrum[0]) == 4);
-	CuAssertTrue(tc, nami_get_absolute(&spectrum[1]) == 0);
-	CuAssertTrue(tc, nami_get_absolute(&spectrum[2]) == 0);
-	CuAssertTrue(tc, nami_get_absolute(&spectrum[3]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&fCoeffs[0]) == 4);
+	CuAssertTrue(tc, nami_get_absolute(&fCoeffs[1]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&fCoeffs[2]) == 0);
+	CuAssertTrue(tc, nami_get_absolute(&fCoeffs[3]) == 0);
 
 	double* data = nami_frame_double(&frame);
 
@@ -52,7 +65,7 @@ void TestFftRossetaCode(CuTest* tc)
 	data[6] = 666;
 	data[7] = 666;
 
-	nami_ifft(spectrum, &frame);
+	nami_ifft(fCoeffs, &frame);
 
 	CuAssertTrue(tc, data[0] == 1);
 	CuAssertTrue(tc, data[1] == 1);

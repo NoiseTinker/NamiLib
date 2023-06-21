@@ -20,6 +20,7 @@ void TestSampleSquareWave(CuTest* tc)
 	double angularFrequency = nami_angular_frequency_from_frequency(4);
 
 	nami_set_function(&periodic, &nami_square_wave);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 1, 0, angularFrequency);
 	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);

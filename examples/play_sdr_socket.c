@@ -29,7 +29,7 @@ int main() {
 
 	FrameReader reader;
 	FrameReaderOptions reader_options;
-	FramePlayer player;
+	//FramePlayer player;
 	FramePlayerOptions player_options;
 
 	struct sockaddr_in stSockAddr;
@@ -71,13 +71,13 @@ int main() {
 	player_options.nbr_channels = 1;
 	player_options.frame_size = AUDIO_FRAME_SIZE;
 
-        uint8_t iq_data[IQ_FRAME_SIZE] = {0};
-        nami_init_frame(&iq_frame, UINT8, &iq_data, IQ_FRAME_SIZE);
+    uint8_t iq_data[IQ_FRAME_SIZE] = {0};
+    nami_init_frame(&iq_frame, UINT8, &iq_data, IQ_FRAME_SIZE);
 
 	uint8_t audio_data[AUDIO_FRAME_SIZE] = {0};
-        nami_init_frame(&audio_frame, SINT16, &audio_data, AUDIO_FRAME_SIZE);
+    nami_init_frame(&audio_frame, SINT16, &audio_data, AUDIO_FRAME_SIZE);
 
-        nami_open_reader(&reader, reader_options);
+    nami_open_reader(&reader, reader_options);
 	//nami_open_player(&player, player_options);
 
 	int loops = 0;

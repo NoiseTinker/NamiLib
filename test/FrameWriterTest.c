@@ -23,6 +23,7 @@ void TestWriteSineWave(CuTest* tc)
 	double angularFrequency = nami_angular_frequency_from_frequency(440);
 
 	nami_set_function(&periodic, &nami_sine_wave);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
@@ -48,6 +49,7 @@ void TestWriteSquareWave(CuTest* tc)
 	double angularFrequency = nami_angular_frequency_from_frequency(440);
 
 	nami_set_function(&periodic, &nami_square_wave);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
@@ -73,6 +75,7 @@ void TestWriteTriangleWave(CuTest* tc)
 	double angularFrequency = nami_angular_frequency_from_frequency(440);
 
 	nami_set_function(&periodic, &nami_triangle_wave);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
@@ -98,6 +101,7 @@ void TestWriteSawtoothWave(CuTest* tc)
 	double angularFrequency = nami_angular_frequency_from_frequency(440);
 
 	nami_set_function(&periodic, &nami_sawtooth_wave);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_init_sampler(&sampler, &wave, 0, 2, SAMPLE_RATE);
 	nami_init_frame(&frame, UINT8, &data, FRAME_SIZE);
@@ -131,6 +135,7 @@ void TestWriteMorseDit(CuTest* tc)
 
 	nami_set_function(&periodic, &nami_sine_wave);
 	nami_set_envelope_function(&envelope, nami_raised_cosine, (void*)&params);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_set_envelope(&wave, &envelope);
 	nami_init_sampler(&sampler, &wave, 0, 0.080, SAMPLE_RATE);
@@ -165,6 +170,7 @@ void TestWriteEnvelopedSawtoothWave(CuTest* tc)
 	params.release_time = 0.5;
 
 	nami_set_function(&periodic, &nami_sawtooth_wave);
+	nami_init_wave(&wave);
 	nami_set_envelope_function(&envelope, nami_adsr, (void*)&params);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_set_envelope(&wave, &envelope);
@@ -199,6 +205,7 @@ void TestWritePSK31Zeros(CuTest* tc)
 
 	nami_set_function(&periodic, &nami_sine_wave);
 	nami_set_envelope_function(&envelope, nami_raised_cosine, (void*)&params);
+	nami_init_wave(&wave);
 	nami_set_periodic(&wave, &periodic, 0.5, 0, angularFrequency);
 	nami_set_envelope(&wave, &envelope);
 	nami_init_sampler(&sampler, &wave, 0, 0.032, SAMPLE_RATE);

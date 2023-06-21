@@ -8,6 +8,7 @@
 #include "Gain.h"
 
 #include <math.h>
+#include <stdlib.h>
 
 #include <stdio.h> // test
 
@@ -61,7 +62,7 @@ float nami_level_from_uint8(uint8_t value)
 
 float nami_level_from_sint16(int16_t value)
 {
-	return 20 * log10(fabs(value) / INT16_MAX);
+	return 20 * log10(abs(value) / INT16_MAX);
 }
 
 float nami_level_from_float(float value)
